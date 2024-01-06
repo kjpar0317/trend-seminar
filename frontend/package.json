@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.0.2",
+    "flexlayout-react": "^0.7.15",
     "gsap": "^3.12.4",
     "next": "14.0.4",
     "react": "^18",
