@@ -5,14 +5,14 @@ import ThemeSelector from "@/components/theme/ThemeSelector";
 export default function Navigation(): ReactElement {
   return (
     // <div className="p-4 xl:ml-80">
-    <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
+    <nav className="block w-full max-w-full bg-transparent text-base-content shadow-none rounded-xl transition-all px-0 py-1">
       <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
         <div className="capitalize">
           <nav aria-label="breadcrumb" className="w-max">
             <ol className="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all">
               <li className="flex items-center text-blue-gray-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
                 <a href="#">
-                  <p className="block antialiased font-sans text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">
+                  <p className="block antialiased font-sans text-sm leading-normal text-primary font-normal opacity-50 transition-all hover:text-primary-focus hover:opacity-100">
                     dashboard
                   </p>
                 </a>
@@ -20,14 +20,14 @@ export default function Navigation(): ReactElement {
                   /
                 </span>
               </li>
-              <li className="flex items-center text-blue-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-blue-500">
-                <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
+              <li className="flex items-center text-primary antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-primary-focus">
+                <p className="block antialiased font-sans text-sm leading-normal text-netural-content font-normal">
                   home
                 </p>
               </li>
             </ol>
           </nav>
-          <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-gray-900">
+          <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-base-content">
             home
           </h6>
         </div>
