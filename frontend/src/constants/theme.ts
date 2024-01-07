@@ -1,4 +1,5 @@
 export const ARR_THEME: string[] = [
+    "sk1",
     "light",
     "dark",
     "cupcake",
