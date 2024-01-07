@@ -11,7 +11,7 @@ export default function Home(): ReactElement {
   useEffect(() => {
     let box: gsap.core.Timeline = gsap.timeline();
 
-    // box.from(".ani_container", { width: "0%", stagger: 0.4, duration: 1.5 });
+    box.to(".ani_container", { opacity: 1, duration: 0.5 });
     box.fromTo(".form_title", { opacity: 0, y: -30 }, { opacity: 1, y: 0 });
     box.fromTo(
       ".form_inputgroup .input_section",
@@ -39,7 +39,7 @@ export default function Home(): ReactElement {
           className="object-cover w-full h-full"
         />
       </div>
-      <div className="ani_container lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+      <div className="ani_container lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 opacity-0">
         <h1 className="form_title text-2xl font-semibold mb-4">Login</h1>
         <div className="form_inputgroup">
           <div className="input_section mb-4">

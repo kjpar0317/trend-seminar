@@ -18,7 +18,7 @@ export default function DefaultLayout({ children }: IRootProps): ReactElement {
   const layout: ILayoutStore = useLayout();
 
   return (
-    <div className="min-h-screen bg-base-300 w-full" data-theme={layout.theme}>
+    <div className="min-h-screen bg-base-200 w-full" data-theme={layout.theme}>
       <Sidebar />
       <div className="p-4 xl:ml-80">
         <Navigation />

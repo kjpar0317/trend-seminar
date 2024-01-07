@@ -16,7 +16,7 @@ export default function ThemeSelector(): ReactElement {
   return (
     <div
       title="Change Theme"
-      className="dropdown dropdown-end bg-base-300 text-base-content"
+      className="dropdown dropdown-end bg-base-200 text-base-content"
     >
       <div tabIndex={0} className="gap-1 normal-case btn btn-ghost">
         <svg
