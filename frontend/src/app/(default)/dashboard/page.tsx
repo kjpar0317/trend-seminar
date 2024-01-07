@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactElement } from "react";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { gsap } from "gsap";
 // import { useGSAP } from "@gsap/react";
 
@@ -28,7 +28,7 @@ export default function Dashboard(): ReactElement {
   //   setToggle(!toggle);
   // }) as MouseEventHandler<HTMLButtonElement>;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     gsap.fromTo(
       ".card",
       { width: 0, opacity: 0.1, duration: 1.5 },

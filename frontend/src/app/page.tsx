@@ -1,14 +1,14 @@
 "use client";
 
 import type { ReactElement } from "react";
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 
 export default function Home(): ReactElement {
   const router = useRouter();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let box: gsap.core.Timeline = gsap.timeline();
 
     // box.from(".ani_container", { width: "0%", stagger: 0.4, duration: 1.5 });
@@ -27,12 +27,11 @@ export default function Home(): ReactElement {
   }, []);
 
   function handleClick() {
-    console.log("asdfafs");
     router.push("/dashboard");
   }
 
   return (
-    <div className="ani_container bg-gray-100 flex justify-center items-center h-screen w-full">
+    <div className="bg-gray-100 flex justify-center items-center h-screen w-full">
       <div className="w-1/2 h-screen hidden lg:block">
         <img
           src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat"
@@ -40,7 +39,7 @@ export default function Home(): ReactElement {
           className="object-cover w-full h-full"
         />
       </div>
-      <div className=" lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+      <div className="ani_container lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <h1 className="form_title text-2xl font-semibold mb-4">Login</h1>
         <div className="form_inputgroup">
           <div className="input_section mb-4">
