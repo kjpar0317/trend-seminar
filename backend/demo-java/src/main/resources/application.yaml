@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: local
+    group:
+      local:
+        - comm-local
+        - redis-local
+
+---
+
+spring:
+  profiles:
+    active: dev
+    group:
+      dev:
+        - comm-dev
+        - redis-dev
+

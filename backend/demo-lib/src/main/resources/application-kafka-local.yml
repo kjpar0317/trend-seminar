@@ -1,0 +1,39 @@
+spring:
+  kafka:
+#    jaas:
+#      loginModule: org.apache.kafka.common.security.plain.PlainLoginModule
+#      options:
+#        username: "XXX"
+#        password: "XXX"
+#      enabled: true
+    bootstrap-servers: localhost:9092
+    consumer:
+#      bootstrap-servers: localhost:9092
+#      group-id: innogrid_consumer_group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        enable:
+          auto:
+            commit: false
+        spring:
+          json:
+            trusted:
+              packages: '*'
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      transaction-id-prefix: ${random.uuid}
+      batch-size: 20000 # default: 16384
+      linger:
+        ms: 10000
+      acks: all
+      retries: 1
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+      type: BATCH
+

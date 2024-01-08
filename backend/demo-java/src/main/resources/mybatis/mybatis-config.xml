@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <setting name="useColumnLabel" value="true" />
+        <setting name="useGeneratedKeys" value="false" />
+        <setting name="defaultExecutorType" value="SIMPLE" />
+        <setting name="defaultStatementTimeout" value="100" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="localCacheScope" value="STATEMENT"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--  모든 컬럼이 null이면 row를 null로 리턴하지 않고 empty객체로 리턴한다
+          <setting name="returnInstanceForEmptyRow" value="true"/>
+        -->
+    </settings>
+</configuration>

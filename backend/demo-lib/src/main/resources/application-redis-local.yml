@@ -1,0 +1,5 @@
+redis:
+  nodes: localhost:6379
+  username:
+  password:
+  cache-ttl: 60 # seconds

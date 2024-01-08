@@ -1,0 +1,7 @@
+dependencies {
+	implementation project(path: ':demo-lib')
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:3.2.1'
+	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3"
+	implementation 'org.mybatis:mybatis:3.5.15'
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.3.2'
+}

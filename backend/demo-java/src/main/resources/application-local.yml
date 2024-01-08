@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demo
+
+server:
+  port: 8080
+
+datasource:
+  mariadb:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://192.168.130.215:3306/tabcloudit?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
+    username: tabcloudit
+    password: tabcloudit
+    maximum-pool-size: 50
+    max-lifetime: 30000
+    idle-timeout: 28000
+    connection-timeout: 0
+    transaction-isolation: TRANSACTION_READ_UNCOMMITTED

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.innogrid.demo.mapper.BatchJobInfoMapper">
+    <select id="selectBatchJobInfo" parameterType="BatchJobInfo" resultType="BatchJobInfo">
+        SELECT
+            JOB_ID
+             , JOB_NAME
+             , CRON_EXPRESSION
+             , USE_YN
+             , AUTO_YN
+        FROM BATCH_JOB_INFO
+        WHERE USE_YN = 'Y'
+          AND AUTO_YN = 'Y'
+    </select>
+
+    <select id="selectBatchJobMapList" parameterType="Map" resultType="CamelCaseMap">
+        SELECT
+            JOB_ID
+             , JOB_NAME
+             , CRON_EXPRESSION
+             , USE_YN
+             , AUTO_YN
+        FROM BATCH_JOB_INFO
+        WHERE USE_YN = 'Y'
+          AND AUTO_YN = 'Y'
+    </select>
+</mapper>
