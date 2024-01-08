@@ -34,7 +34,7 @@ public class MyBatisAspect {
             if(map.get("page") instanceof Integer nPage && nPage > 1) {
                 page = nPage;
             }
-            if(map.get("itemInPage") instanceof Integer nItemInPage && nItemInPage > 1) {
+            if(map.get("itemInPage") instanceof Integer nItemInPage && nItemInPage > 0) {
                 itemInPage = nItemInPage;
             }
         } else if(arg[0] instanceof BaseVO) {
@@ -43,7 +43,7 @@ public class MyBatisAspect {
             if(!ObjectUtils.isEmpty(vo.getPage()) && vo.getPage() > 1) {
                 page = vo.getPage();
             }
-            if(!ObjectUtils.isEmpty(vo.getItemInPage()) && vo.getItemInPage() > 1) {
+            if(!ObjectUtils.isEmpty(vo.getItemInPage()) && vo.getItemInPage() > 0) {
                 itemInPage = vo.getItemInPage();
             }
         }
