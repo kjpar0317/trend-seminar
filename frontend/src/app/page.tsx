@@ -5,6 +5,9 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 
+// env 테스트
+console.log(process.env.NEXT_PUBLIC_ENV_TEST);
+
 export default function Home(): ReactElement {
   const router = useRouter();
 

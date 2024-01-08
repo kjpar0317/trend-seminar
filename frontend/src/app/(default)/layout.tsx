@@ -1,30 +1,35 @@
 "use client";
 
 import type { ReactElement, ReactNode } from "react";
-
 import type { ILayoutStore } from "@/services/layout/useLayout";
+
+import { ErrorBoundary } from "react-error-boundary";
+
+import ErrorFallback from "@/components/layout/error/ErrorFallback";
 import useLayout from "@/services/layout/useLayout";
 import Sidebar from "@/components/layout/common/default/Sidebar";
 import Navigation from "@/components/layout/common/default/Navigation";
 import Footer from "@/components/layout/common/default/Footer";
 
-import "flexlayout-react/style/light.css";
-
 interface IRootProps {
   children: ReactNode;
 }
 
-export default function DefaultLayout({ children }: IRootProps): ReactElement {
+export default function DefaultLayout({ children }: Readonly<IRootProps>): ReactElement {
   const layout: ILayoutStore = useLayout();
 
   return (
-    <div className="min-h-screen bg-base-200 w-full" data-theme={layout.theme}>
-      <Sidebar />
-      <div className="p-4 xl:ml-80">
-        <Navigation />
-        {children}
-        <Footer />
+    <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+      >
+      <div className="min-h-screen bg-base-200 w-full" data-theme={layout.theme}>
+        <Sidebar />
+        <div className="p-4 xl:ml-80">
+          <Navigation />
+          {children}
+          <Footer />
+        </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 }
