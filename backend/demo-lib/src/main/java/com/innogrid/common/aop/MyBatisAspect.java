@@ -25,28 +25,31 @@ public class MyBatisAspect {
         Object[] arg = joinPoint.getArgs();
 
         PageBounds pageBounds = new PageBounds();
-        Integer page = 1;
-        Integer itemInPage = 10;
+        int page = 1;
+        int itemInPage = 10;
 
         if(arg[0] instanceof Map) {
             Map<String, Object> map = (Map<String, Object>) arg[0];
 
-            page = (Integer) map.computeIfPresent("page", (k, v) -> v);
-            itemInPage = (Integer) map.computeIfPresent("itemInPage", (k, v) -> v);
+            if(map.get("page") instanceof Integer nPage && nPage > 1) {
+                page = nPage;
+            }
+            if(map.get("itemInPage") instanceof Integer nItemInPage && nItemInPage > 1) {
+                itemInPage = nItemInPage;
+            }
         } else if(arg[0] instanceof BaseVO) {
             BaseVO vo = (BaseVO) arg[0];
 
-            if(!ObjectUtils.isEmpty(vo.getPage())) {
+            if(!ObjectUtils.isEmpty(vo.getPage()) && vo.getPage() > 1) {
                 page = vo.getPage();
             }
-            if(!ObjectUtils.isEmpty(vo.getItemInPage())) {
+            if(!ObjectUtils.isEmpty(vo.getItemInPage()) && vo.getItemInPage() > 1) {
                 itemInPage = vo.getItemInPage();
             }
         }
 
-        if(page != null) { pageBounds.setPage(page); }
-        if(itemInPage != null) { pageBounds.setLimit(itemInPage); }
-
+        pageBounds.setPage(page);
+        pageBounds.setLimit(itemInPage);
         pageBounds.setAsyncTotalCount(false);
         pageBounds.setContainsTotalCount(false);
 
