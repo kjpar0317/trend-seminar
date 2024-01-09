@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.0.2",
+    "dockview": "^1.8.5",
     "flexlayout-react": "^0.7.15",
     "gsap": "^3.12.4",
     "lodash-es": "^4.17.21",

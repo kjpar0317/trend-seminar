@@ -49,11 +49,14 @@ export default function ThemeSelector(): ReactElement {
         <div className="grid grid-cols-1 gap-3 p-3" tabIndex={0}>
           {ARR_THEME.map((m: string, index: number) => (
             <div
-              key={index}
+              key={m}
+              role="button"
+              tabIndex={index}
               className="overflow-hidden rounded-lg outline outline-2 outline-offset-2 outline-base-content"
               data-set-theme="theme"
               data-act-classname="outline"
               onClick={() => handleTheme(m)}
+              onFocus={() => {}}
             >
               <div
                 data-theme={m}
