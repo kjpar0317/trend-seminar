@@ -61,7 +61,12 @@ export default function ThemeSelector(): ReactElement {
               >
                 <div className="grid grid-cols-5 grid-rows-3">
                   <div className="flex col-span-5 row-span-3 row-start-1 gap-1 px-4 py-3">
-                    <div className="flex-grow text-sm font-bold">{m}</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className={`${layout.theme === m ? "" : "invisible" } h-3 w-3 shrink-0"`}>
+                      <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"></path>
+                    </svg>
+                    <div className="flex-grow text-sm font-bold">        
+                      {m}
+                    </div>
                     <div className="flex flex-wrap flex-shrink-0 gap-1">
                       <div className="w-2 rounded bg-primary"></div>
                       <div className="w-2 rounded bg-secondary"></div>
