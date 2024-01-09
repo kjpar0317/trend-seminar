@@ -8,9 +8,9 @@ import "flexlayout-react/style/light.css";
 
 export default function DefaultLayout({
   children,
-}: {
+}: Readonly<{
   children: ReactElement;
-}) {
+}>) {
   return (
     <div className="min-h-screen bg-gray-50/50 w-full">
       <Sidebar />

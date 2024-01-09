@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactElement } from "react";
+import type { TabNode } from "flexlayout-react";;
 import { Layout, Model } from "flexlayout-react";
 
 const json: any = {
@@ -49,25 +50,21 @@ const json: any = {
 const model = Model.fromJson(json);
 
 export default function Board(): ReactElement {
-  const factory = (node: any) => {
-    var component = node.getComponent();
+  const factory = (node: TabNode) => {
+    const component: string | undefined = node.getComponent();
 
     if (component === "button") {
       return <button>{node.getName()}</button>;
     } else if (component === "div") {
       return (
-        <>
-          <div>Wow!</div>
-        </>
+        <div>Wow!</div>
       );
     }
   };
 
   return (
-    <>
-      <div className="relative flex h-screen">
+    <div className="relative flex h-screen">
         <Layout model={model} factory={factory} />
       </div>
-    </>
   );
 }

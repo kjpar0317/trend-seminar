@@ -8,7 +8,7 @@ import { gsap } from "gsap";
 import DemoCard from "@/components/card/DemoCard";
 
 export default function Dashboard(): ReactElement {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>();
   // const containerRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
   // const { contextSafe } = useGSAP((): void => {

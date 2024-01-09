@@ -2,9 +2,9 @@ import type { ReactElement } from "react";
 
 export default function Profile({
   params: { profile },
-}: {
+}: Readonly<{
   params: { profile: string[] };
-}): ReactElement {
+}>): ReactElement {
   return (
     <>
       <div>username: {profile[0]}</div>
