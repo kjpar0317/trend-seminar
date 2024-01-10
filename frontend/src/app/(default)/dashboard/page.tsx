@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactElement } from "react";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { gsap } from "gsap";
 // import { useGSAP } from "@gsap/react";
 
@@ -30,13 +30,14 @@ export default function Dashboard(): ReactElement {
   //   setToggle(!toggle);
   // }) as MouseEventHandler<HTMLButtonElement>;
 
-  useLayoutEffect(() => {
-    animate.initAnimate();
-}, [animate]);
+  useEffect(() => {
+    animate?.initAnimate?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleClick() {
     if (!toggle) {
-      const rotateTimeline: gsap.core.Timeline = gsap.timeline({ repeat: 0 });
+      const rotateTimeline: gsap.core.Timeline = gsap.timeline({});
       rotateTimeline
         .to(".card", { rotation: "+=180", stagger: 0.5 })
         .to(".card", { x: 100, stagger: 0.5 });

@@ -2,40 +2,33 @@
 import { useCallback } from 'react';
 import useSWR from 'swr';
 
-export interface ILayoutStore {
-    theme?: string;
+export interface IThemeStore {
+    themePattern?: string;
     animate?: boolean;
     divAnimate?: TDivAction;
     formAnimate?: TFormAction;
-    getAnimateInitParams: () => void;
-    setTheme: (val: string) => void;
+    setThemePattern: (val: string) => void;
     setAnimate: (animate: boolean) => void;
     setDivAnimate: (divAnimate: TDivAction) => void;
     setFormAnimate: (formAnimate: TFormAction) => void;
 } 
 
-let _theme: string = "light";
+let _themePattern: string = "light";
 let _animnate: boolean = true;
 let _divAnimate: TDivAction = "fade";
 let _formAnimate: TFormAction = "elevator";
 
 // https://velog.io/@gene028/NextJS-%EC%A7%80%EB%8F%84-%EA%B0%9C%EB%B0%9C-2-SWR%EB%A1%9C-%EC%A0%84%EC%97%AD-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0
-export default function useLayout(): ILayoutStore {
-    const { data : theme , mutate : themeMutate } = useSWR<string>("theme", () => _theme);
-    const { data : animate , mutate : animateMutate } = useSWR<boolean>("aniumate", () => _animnate);
+export default function useTheme(): IThemeStore {
+    const { data : themePattern , mutate : themePatternMutate } = useSWR<string>("themePattern", () => _themePattern);
+    const { data : animate , mutate : animateMutate } = useSWR<boolean>("animnate", () => _animnate);
     const { data: divAnimate, mutate: divAnimateMutate } = useSWR<TDivAction>("divAnimate", () => _divAnimate);
     const { data: formAnimate, mutate: formAnimateMutate } = useSWR<TFormAction>("formAnimate", () => _formAnimate);
 
-    function getAnimateInitParams() {
-        if(animate) {
-            return "opacity-0";
-        }
-    }
-
-    const setTheme = useCallback((theme: string) => {
-        _theme = theme;
-        return themeMutate();
-    }, [themeMutate]);
+    const setThemePattern = useCallback((themePattern: string) => {
+        _themePattern = themePattern;
+        return themePatternMutate();
+    }, [themePatternMutate]);
     
     const setAnimate = useCallback((animate: boolean) => {
         _animnate = animate;
@@ -53,12 +46,11 @@ export default function useLayout(): ILayoutStore {
     }, [formAnimateMutate]);
 
     return {
-        theme
+        themePattern
         , animate
         , divAnimate
         , formAnimate
-        , getAnimateInitParams
-        , setTheme
+        , setThemePattern
         , setAnimate
         , setDivAnimate
         , setFormAnimate

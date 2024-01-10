@@ -1,12 +1,12 @@
 "use client";
 
 import type { ReactElement, ReactNode } from "react";
-import type { ILayoutStore } from "@/services/layout/useLayout";
+import type { IThemeStore } from "@/services/layout/useTheme";
 
 import { ErrorBoundary } from "react-error-boundary";
 
+import useTheme from "@/services/layout/useTheme";
 import ErrorFallback from "@/components/layout/error/ErrorFallback";
-import useLayout from "@/services/layout/useLayout";
 import Sidebar from "@/components/layout/common/default/Sidebar";
 import Navigation from "@/components/layout/common/default/Navigation";
 import Footer from "@/components/layout/common/default/Footer";
@@ -15,14 +15,17 @@ interface IRootProps {
   children: ReactNode;
 }
 
-export default function DefaultLayout({ children }: Readonly<IRootProps>): ReactElement {
-  const layout: ILayoutStore = useLayout();
+export default function DefaultLayout({
+  children,
+}: Readonly<IRootProps>): ReactElement {
+  const theme: IThemeStore = useTheme();
 
   return (
-    <ErrorBoundary
-        FallbackComponent={ErrorFallback}
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <div
+        className="min-h-screen bg-base-200 w-full"
+        data-theme={theme.themePattern}
       >
-      <div className="min-h-screen bg-base-200 w-full" data-theme={layout.theme}>
         <Sidebar />
         <div className="p-4 xl:ml-80">
           <Navigation />
