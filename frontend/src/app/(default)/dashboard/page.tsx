@@ -1,13 +1,15 @@
 "use client";
 
 import type { ReactElement } from "react";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 // import { useGSAP } from "@gsap/react";
 
-import DemoCard from "@/components/card/DemoCard";
+import useAnimate from "@/services/layout/useAnimate";
+import DemoCard from "@/components/card/demo/DemoCard";
 
 export default function Dashboard(): ReactElement {
+  const animate = useAnimate();
   const [toggle, setToggle] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>();
   // const containerRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
@@ -28,13 +30,9 @@ export default function Dashboard(): ReactElement {
   //   setToggle(!toggle);
   // }) as MouseEventHandler<HTMLButtonElement>;
 
-  useEffect(() => {
-    gsap.fromTo(
-      ".card",
-      { width: 0, opacity: 0.1, duration: 1.5 },
-      { width: "100%", opacity: 1, stagger: 0.5 }
-    );
-  }, []);
+  useLayoutEffect(() => {
+    animate.initAnimate();
+}, [animate]);
 
   function handleClick() {
     if (!toggle) {
@@ -51,7 +49,7 @@ export default function Dashboard(): ReactElement {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+      <div className="max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="container gap-5 space-y-10">
           <DemoCard onClick={handleClick} />
           <DemoCard onClick={handleClick} />

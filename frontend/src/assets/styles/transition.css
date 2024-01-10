@@ -1,0 +1,3 @@
+.transition-ease-in {
+    @apply duration-300 ease-in transition-transform transform hover:scale-125
+}

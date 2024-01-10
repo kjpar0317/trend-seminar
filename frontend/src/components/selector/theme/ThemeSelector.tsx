@@ -16,7 +16,7 @@ export default function ThemeSelector(): ReactElement {
   return (
     <div
       title="Change Theme"
-      className="dropdown dropdown-end bg-base-200 text-base-content"
+      className="dropdown dropdown-end bg-base-200 text-base-content transition-ease-in"
     >
       <div tabIndex={0} className="gap-1 normal-case btn btn-ghost">
         <svg
@@ -45,7 +45,7 @@ export default function ThemeSelector(): ReactElement {
           <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
         </svg>
       </div>
-      <div className="z-[3000] dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl">
+      <div className="z-auto dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl">
         <div className="grid grid-cols-1 gap-3 p-3" tabIndex={0}>
           {ARR_THEME.map((m: string, index: number) => (
             <div

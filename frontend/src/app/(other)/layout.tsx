@@ -1,5 +1,10 @@
+"use client";
+
 import type { ReactElement } from "react";
 
+import { useLayoutEffect } from "react";
+
+import useAnimate from "@/services/layout/useAnimate";
 import Sidebar from "@/components/layout/common/other/Sidebar";
 import Navigation from "@/components/layout/common/other/Navigation";
 import Footer from "@/components/layout/common/other/Footer";
@@ -11,6 +16,12 @@ export default function DefaultLayout({
 }: Readonly<{
   children: ReactElement;
 }>) {
+  const animate = useAnimate();
+
+  useLayoutEffect(() => {
+    animate.initAnimate();
+  }, [animate]);
+
   return (
     <div className="min-h-screen bg-gray-50/50 w-full">
       <Sidebar />

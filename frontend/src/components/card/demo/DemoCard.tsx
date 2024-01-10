@@ -1,17 +1,20 @@
-import type { ReactElement, MouseEvent, MouseEventHandler } from "react";
+import type { ReactElement, MouseEvent } from "react";
 import Image from "next/image";
+import useLayout from "@/services/layout/useLayout";
 
 interface IDemoCard {
   onClick?: (e: any) => void;
 }
 
 export default function DemoCard(props: IDemoCard): ReactElement {
+  const layout = useLayout();
+
   function handleClick(e: MouseEvent<HTMLElement>) {
     props.onClick?.(e);
   }
 
   return (
-    <div className="card card-side bg-base-100 shadow-xl">
+    <div className={`${layout.getAnimateInitParams()} card card-side bg-base-100 shadow-xl animate_div`}>
       <figure>
         <Image
           src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"

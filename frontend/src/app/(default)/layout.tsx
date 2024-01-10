@@ -26,7 +26,9 @@ export default function DefaultLayout({ children }: Readonly<IRootProps>): React
         <Sidebar />
         <div className="p-4 xl:ml-80">
           <Navigation />
-          {children}
+          <div className="w-full h-[calc(100vh_-_130px)] overflow-y-auto">
+            {children}
+          </div>
           <Footer />
         </div>
       </div>

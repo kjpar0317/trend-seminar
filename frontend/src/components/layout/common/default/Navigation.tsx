@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 
-import ThemeSelector from "@/components/theme/ThemeSelector";
+import ErrorIndicator from "@/components/indicator/monitoring/ErrorIndicator";
+import ThemeSelector from "@/components/selector/theme/ThemeSelector";
 
 export default function Navigation(): ReactElement {
   return (
@@ -43,6 +44,7 @@ export default function Navigation(): ReactElement {
               </label>
             </div>
           </div>
+          <ErrorIndicator />
           <ThemeSelector />
         </div>
       </div>

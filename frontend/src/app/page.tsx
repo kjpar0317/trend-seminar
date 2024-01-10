@@ -87,17 +87,18 @@ export default function Home(): ReactElement {
           </div>
           <div className="form_button">
             <button
-              className=" bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
+              className=" bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full btn-ease-in"
               onClick={handleClick}
             >
               Login
             </button>
           </div>
         </div>
-        <div className="form_last mt-6 text-blue-500 text-center">
+        <div className="form_last mt-6 text-blue-500 text-center transition duration-500 ease-linea">
           <a href="#" className="hover:underline">
             Sign up Here
           </a>
+          <button className="absolute transition w-80 duration-300 ease-in-out">test</button>
         </div>
       </div>
     </div>
