@@ -24,7 +24,8 @@ export type TInputAction = "fade" | "transform";
 export interface IAnimateStore {
     initAnimate: () => void;
     bounceAnimate: (selector: string, optionClsName?: string | undefined) => void;
-    foldAnimate: (...targets: string[]) => void;
+    openFoldAnimate: (timeline: gsap.core.Timeline, ...targets: string[]) => gsap.core.Timeline;
+    reverseAnimate: (timeline: gsap.core.Timeline) => void;
 } 
 
 export default function useAnimate(): IAnimateStore {
@@ -78,29 +79,32 @@ export default function useAnimate(): IAnimateStore {
         });
     }
     
-    function foldAnimate(...targets: string[]) {
-        const foldTimeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-
+    function openFoldAnimate(timeline: gsap.core.Timeline, ...targets: string[]): gsap.core.Timeline {
         range(0, targets.length).forEach((f: number) => {
             if(f === 0) {
-                foldTimeline.to(targets[f], { scaleY: 0.01, x: 1, opacity: 1, display: "flex", duration: 0.4 })
+                timeline
+                    .to(targets[f], {scaleY: 0.01, x: 1, opacity: 1, display: "flex", duration: 0.4})
+                    .to(targets[f], {scaleY: 1, background: "rgba(255,255,255,0.16)", duration: 0.6});
             } else if(f === 1) {
-                foldTimeline.to(targets[f], { scaleY: 1, background: "bg-white", duration: 0.6 });
+                timeline.to(targets[f], {scaleY: 1, opacity: 1, duration: 0.6}, "-=0.4")
             } else if(f === 2) {
-                foldTimeline.to(targets[f], { scaleY: 1, opacity: 1, duration: 0.6 }, "-=0.4")
+                timeline.to(targets[f], {scaleY: 1, opacity: 1, duration: 0.4}, "-=0.2")
             } else if(f === 3) {
-                foldTimeline.to(targets[f], { scaleY: 1, opacity: 1, duration: 0.4 }, "-=0.2")
-            } else if(f === 4) {
-                foldTimeline.to(targets[f], { background: "bg-white", border: "1px solid border-white"});
+                timeline.to(targets[f], { background: "rgba(255,255,255,0.3)", border: "1px solid rgba(255,255,255,0.3)", duration: 0.8}, "-=0.4");
             }
         });
 
-        foldTimeline.to(targets[0], { opacity: 0, duration: 0.1 });
+        return timeline;
+    }
+
+    function reverseAnimate(timeline: gsap.core.Timeline) {
+        timeline.reverse();
     }
 
     return {
         initAnimate,
         bounceAnimate,
-        foldAnimate
+        openFoldAnimate,
+        reverseAnimate
     };
 }
