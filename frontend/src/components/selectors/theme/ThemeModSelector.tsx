@@ -27,8 +27,7 @@ export default function ThemeModSelector(): ReactElement {
             <div tabIndex={0} className="z-[9999] dropdown-content bg-base-200 text-base-content rounded-box top-px h-[28.6rem] max-h-[calc(100vh-10rem)] w-56 overflow-y-auto border border-white/5 shadow-2xl outline outline-1 outline-black/5 mt-16">
                 <div className="grid grid-cols-1 gap-3 p-3">
                 {ARR_THEME.map((m: string) => (
-                    <button key={m} className="outline-base-content text-start outline-offset-4 [&amp;_svg]:visible" 
-                        data-set-theme={m} data-act-className="[&amp;_svg]:visible" onClick={() => handleTheme(m)}>
+                    <button key={m} className="outline-base-content text-start outline-offset-4 [&amp;_svg]:visible"  onClick={() => handleTheme(m)}>
                         <span data-theme={m} className="bg-base-100 rounded-btn text-base-content block w-full cursor-pointer font-sans">
                             <span className="grid grid-cols-5 grid-rows-3">
                                 <span className="col-span-5 row-span-3 row-start-1 flex items-center gap-2 px-4 py-3">
