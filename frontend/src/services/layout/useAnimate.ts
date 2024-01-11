@@ -37,13 +37,13 @@ export default function useAnimate(): IAnimateStore {
             } else if(action === "shuffle") {
                 range(0, animateDiv.length).forEach((index: number) => {
                     if(index % 4 === 0) {
-                        timeline.fromTo(animateDiv[index], { x: -400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 1.2, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { x: -400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
                     } else if(index % 4 === 1) {
-                        timeline.fromTo(animateDiv[index], { y: -400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 1.2, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { y: -400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
                     } else if(index % 4 === 2) {
-                        timeline.fromTo(animateDiv[index], { x: 400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 1.2, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { x: 400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
                     } else if(index % 4 === 3) {
-                        timeline.fromTo(animateDiv[index], { y: 400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 1.2, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { y: 400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
                     }
                 });
             }
