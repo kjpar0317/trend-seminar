@@ -1,10 +1,12 @@
 package com.innogrid.demo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.innogrid.common.handler.CustomKeyGenerator;
 import io.lettuce.core.ReadFrom;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -38,24 +40,6 @@ public class RedisConfig {
 
     @Value("${redis.cache-ttl:0}")
     private int cacheTtl;
-
-//    @Bean
-//    LettuceConnectionFactory redisConnectionFactory(RedisClusterConfiguration redisConfiguration) {
-//        LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
-//                .readFrom(ReadFrom.REPLICA_PREFERRED)
-//                .commandTimeout(Duration.ofSeconds(cacheTtl))
-//                .build();
-//        return new LettuceConnectionFactory(redisConfiguration, clientConfig);
-//    }
-
-//    @Bean
-//    RedisClusterConfiguration redisConfiguration() {
-//        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration(redisNodes);
-//        redisClusterConfiguration.setUsername(redisUsername);
-//        redisClusterConfiguration.setPassword(redisPassword);
-//        redisClusterConfiguration.setMaxRedirects(5);
-//        return redisClusterConfiguration;
-//    }
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
@@ -127,5 +111,26 @@ public class RedisConfig {
         template.setEnableTransactionSupport(true);
         template.afterPropertiesSet();
         return template;
+    }
+
+    /**
+     * Redis Cacheable key Generator
+     *
+     * 이전
+     *   @Cacheable(value = "productCache", key = "'findProductsPageByBrand' + #filterVo + #pageable")
+     *   public Page<ProductResponseDto> findProductsPageByBrand(FilterVo filterVo, Pageable pageable) {
+     *     return productRepository.findProductByBrand(filterVo, pageable);
+     *   }
+     * 이후
+     *   @Cacheable(value = "productCache")
+     *   public Page<ProductResponseDto> findProductsPageByBrand(FilterVo filterVo, Pageable pageable) {
+     *     return productRepository.findProductByBrand(filterVo, pageable);
+     *   }
+     *
+     * @return
+     */
+    @Bean
+    public KeyGenerator keyGenerator() {
+        return new CustomKeyGenerator();
     }
 }

@@ -24,6 +24,11 @@ public class RedisDemoController {
         return demoService.redisCacheDemo1(RedisTestVO.builder().key(pk).value("test").build());
     }
 
+    @GetMapping(value = "/cache2/{pk}")
+    public @ResponseBody Map<String, Object> cache2(@PathVariable String pk) {
+        return demoService.redisCacheDemo2(RedisTestVO.builder().key(pk).value("test").build());
+    }
+
     @DeleteMapping(value = "/cache/{pk}")
     public @ResponseBody String deleteCache(@PathVariable String pk) {
         demoService.deleteRedisCacheDemo(pk);

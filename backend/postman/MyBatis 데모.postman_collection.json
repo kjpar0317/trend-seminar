@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "bd626131-7f8e-47e3-a1eb-80306915b3c2",
+		"name": "MyBatis 데모",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32102148"
+	},
+	"item": [
+		{
+			"name": "페이징 테스트",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"page\": 1,\r\n    \"itemInPage\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/mybatis/test1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mybatis",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "페이징 테스트2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"page\": 1,\r\n    \"itemInPage\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/mybatis/test2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mybatis",
+						"test2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "4ae19c94-e45f-487a-b345-b126bc5f3e2e",
+		"name": "카프카 데모",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32102148"
+	},
+	"item": [
+		{
+			"name": "Kafka 메세지 발송",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"test1\": 13132123,\r\n    \"test2\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/producer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"producer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

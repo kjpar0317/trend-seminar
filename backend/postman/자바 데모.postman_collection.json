@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "c421c8d7-dbc9-4ecc-b8be-28e247b82578",
+		"name": "자바 데모",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32102148"
+	},
+	"item": [
+		{
+			"name": "Java 데모 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo/test1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo",
+						"test1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Java 데모 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demo/test2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demo",
+						"test2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

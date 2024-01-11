@@ -60,7 +60,7 @@ export default function useAnimate(): IAnimateStore {
             } else if(action === "transform") {
                 timeline.fromTo(target, { scale: 0.5, opacity: 0 }, { ease: "power3.inOut", duration: 1, scale: 1, stagger: 0.3, opacity: 1  });
             } else if(action === "elevator") {
-                timeline.to(target, { opacity: 1})
+                timeline.to(target, { opacity: 1, duration: 0.2 })
                     .fromTo(`${target} .input`, { opacity: 0, y: 50 }, { opacity: 1, y: 0, stagger: 0.3 })
                     .fromTo(`${target} .btn`, { opacity: 0, y: 50 }, { opacity: 1, y: 0, stagger: 0.3 });
             }
