@@ -1,14 +1,13 @@
 import type { ReactElement } from "react";
 
-export default function Profile({
+import Profile from "@/components/services/default/Profile";
+
+export default function ProfilePage({
   params: { profile },
 }: Readonly<{
   params: { profile: string[] };
 }>): ReactElement {
   return (
-    <>
-      <div>username: {profile[0]}</div>
-      <div>email: {profile[1]}</div>
-    </>
+    <Profile username={profile[0]} email={profile[1]} />
   );
 }

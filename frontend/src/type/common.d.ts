@@ -26,5 +26,5 @@ type TEaseExpo = "expo.out" | "expo.inOut" | "expo.in";
 type TEaseSinc = "sinc.out" | "sinc.inOut" | "sinc.in";
 
 type TEaseType = TEasePower1 | TEasePower2 | TEasePower3 | TEasePower4 | TEaseBack | TEaseBounce | TEaseCirc | TEaseElastic | TEaseExpo | TEaseSinc | "steps";
-type TDivAction = "fade" | "transform" | "shuffle";
-type TFormAction = "fade" | "transform" | "elevator";
+type TDivAction = "fade" | "transform" | "shuffle" | "none";
+type TFormAction = "fade" | "transform" | "elevator"| "none";

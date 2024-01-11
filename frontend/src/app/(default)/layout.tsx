@@ -7,6 +7,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import useTheme from "@/services/layout/useTheme";
 import ErrorFallback from "@/components/layouts/error/ErrorFallback";
+import GsapModalProvider from "@/components/provider/GsapModalProvider";
 import Sidebar from "@/components/layouts/commons/default/Sidebar";
 import Navigation from "@/components/layouts/commons/default/Navigation";
 import Footer from "@/components/layouts/commons/default/Footer";
@@ -22,10 +23,7 @@ export default function DefaultLayout({
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <div
-        className="min-h-screen bg-base-200 w-full"
-        data-theme={theme.themePattern}
-      >
+      <div className="min-h-screen bg-base-200 w-full" data-theme={theme.themePattern}>
         <Sidebar />
         <div className="p-4 xl:ml-80">
           <Navigation />

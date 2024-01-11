@@ -3,10 +3,10 @@ import { useCallback } from 'react';
 import useSWR from 'swr';
 
 export interface IThemeStore {
-    themePattern?: string;
-    animate?: boolean;
-    divAnimate?: TDivAction;
-    formAnimate?: TFormAction;
+    themePattern: string | undefined;
+    animate: boolean | undefined;
+    divAnimate: TDivAction | undefined;
+    formAnimate: TFormAction | undefined;
     setThemePattern: (val: string) => void;
     setAnimate: (animate: boolean) => void;
     setDivAnimate: (divAnimate: TDivAction) => void;
