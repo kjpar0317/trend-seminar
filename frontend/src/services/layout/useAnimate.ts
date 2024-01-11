@@ -37,13 +37,13 @@ export default function useAnimate(): IAnimateStore {
             } else if(action === "shuffle") {
                 range(0, animateDiv.length).forEach((index: number) => {
                     if(index % 4 === 0) {
-                        timeline.fromTo(animateDiv[index], { x: -400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { x: -400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 });
                     } else if(index % 4 === 1) {
-                        timeline.fromTo(animateDiv[index], { y: -400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { y: -400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 });
                     } else if(index % 4 === 2) {
-                        timeline.fromTo(animateDiv[index], { x: 400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { x: 400, opacity: 0 }, { x: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 });
                     } else if(index % 4 === 3) {
-                        timeline.fromTo(animateDiv[index], { y: 400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 0.6, opacity: 1 });
+                        timeline.fromTo(animateDiv[index], { y: 400, opacity: 0 }, { y: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 });
                     }
                 });
             }
@@ -71,7 +71,7 @@ export default function useAnimate(): IAnimateStore {
     function bounceAnimate(selector: string, optionClsName: string | undefined) {
         if(!theme.animate) return;
         const bounceTimeline = gsap.timeline({});
-        bounceTimeline.to(selector, { scale: 1.2, ease: "bounce", opacity: 1, yoyo: true, repeat: 5, className: optionClsName
+        bounceTimeline.to(selector, { scale: 1.05, ease: "bounce", yoyo: true, repeat: 5, background: "oklch(var(--er)/var(--tw-bg-opacity))",className: optionClsName
             , onComplete: function () {
                 this.progress(0).kill();
             }
