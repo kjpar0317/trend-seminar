@@ -1,4 +1,4 @@
-export const ARR_MENUS: IMenu[] = [
+export const ARR_MENU: IMenu[] = [
     {
         url: "/dashboard",
         name: "dashboard",

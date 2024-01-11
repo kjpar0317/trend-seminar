@@ -3,7 +3,7 @@
 import { useLayoutEffect, type ReactElement } from "react";
 import { gsap } from "gsap";
 
-import "@/assets/styles/notfound.css";
+import "@/assets/style/notfound.css";
 
 export default function Custom404(): ReactElement {
   useLayoutEffect(() => {

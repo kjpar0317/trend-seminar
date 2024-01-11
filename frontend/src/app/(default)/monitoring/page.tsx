@@ -4,7 +4,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 
 import { useEffect } from "react";
 import useAnimate from "@/services/layout/useAnimate";
-import GridCard from "@/components/card/demo/GridCard";
+import GridCard from "@/components/cards/demo/GridCard";
 
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";

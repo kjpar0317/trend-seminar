@@ -2,9 +2,9 @@
 
 import type { ReactElement } from "react";
 
-import Sidebar from "@/components/layout/common/other/Sidebar";
-import Navigation from "@/components/layout/common/other/Navigation";
-import Footer from "@/components/layout/common/other/Footer";
+import Sidebar from "@/components/layouts/commons/other/Sidebar";
+import Navigation from "@/components/layouts/commons/other/Navigation";
+import Footer from "@/components/layouts/commons/other/Footer";
 
 import "flexlayout-react/style/light.css";
 

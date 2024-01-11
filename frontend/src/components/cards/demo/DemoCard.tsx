@@ -5,7 +5,7 @@ interface IDemoCard {
   onClick?: (e: any) => void;
 }
 
-export default function DemoCard(props: IDemoCard): ReactElement {
+export default function DemoCard(props: Readonly<IDemoCard>): ReactElement {
   function handleClick(e: MouseEvent<HTMLElement>) {
     props.onClick?.(e);
   }

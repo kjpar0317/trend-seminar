@@ -7,9 +7,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { includes } from "lodash-es";
 
-import { ARR_MENUS } from "@/constants/menu";
+import { ARR_MENU } from "@/constant/menu";
 
-import "@/assets/styles/layout.css";
+import "@/assets/style/layout.css";
 
 export default function Sidebar(): ReactElement {
   const pathname = usePathname();
@@ -20,15 +20,15 @@ export default function Sidebar(): ReactElement {
   }, [pathname]);
 
   return (
-    <aside className="bg-primary -translate-x-80 glass fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
-      <div className="relative border-b border-primary-content/60">
+    <aside className="bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
+      <div className="relative border-b border-white/20">
         <a className="flex items-center gap-4 py-6 px-8" href="#/">
-          <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-primary-content">
+          <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-white">
             샘플
           </h6>
         </a>
         <button
-          className="middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-white hover:bg-white/10 active:bg-white/30 absolute right-0 top-0 grid rounded-br-none rounded-tl-none xl:hidden"
+          className="middle text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-white hover:bg-white/10 active:bg-white/30 absolute right-0 top-0 grid rounded-br-none rounded-tl-none xl:hidden"
           type="button"
         >
           <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
@@ -39,7 +39,7 @@ export default function Sidebar(): ReactElement {
               strokeWidth="2.5"
               stroke="currentColor"
               aria-hidden="true"
-              className="h-5 w-5 text-primary-content"
+              className="h-5 w-5 text-white"
             >
               <path
                 strokeLinecap="round"
@@ -52,7 +52,7 @@ export default function Sidebar(): ReactElement {
       </div>
       <div className="m-4">
         <ul className="mb-4 flex flex-col gap-1">
-          {ARR_MENUS.map((m: IMenu) => (
+          {ARR_MENU.map((m: IMenu) => (
             <li key={m.url}>
               <Link aria-current="page" href={m.url}>
                 <button
@@ -75,15 +75,15 @@ export default function Sidebar(): ReactElement {
                 </button>
               </Link>
             </li>
-          ))}
+          ))}         
         </ul>
         <ul className="mb-4 flex flex-col gap-1">
           <li>
             <Link href="/board">
               <button
                 className={`${
-                  (currentRoute == "/board" && "default_button_active") ||
-                  "default_button_noactive"
+                  (currentRoute == "/board" && "other_button_active") ||
+                  "other_button_noactive"
                 }`}
                 type="button"
               >

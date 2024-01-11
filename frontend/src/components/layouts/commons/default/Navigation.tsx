@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 
-import ErrorIndicator from "@/components/indicator/monitoring/ErrorIndicator";
-import ThemeModSelector from "@/components/selector/theme/ThemeModSelector";
+import ErrorIndicator from "@/components/indicators/monitoring/ErrorIndicator";
+import ThemeModSelector from "@/components/selectors/theme/ThemeModSelector";
 
 export default function Navigation(): ReactElement {
   return (

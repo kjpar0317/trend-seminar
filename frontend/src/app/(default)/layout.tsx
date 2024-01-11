@@ -6,10 +6,10 @@ import type { IThemeStore } from "@/services/layout/useTheme";
 import { ErrorBoundary } from "react-error-boundary";
 
 import useTheme from "@/services/layout/useTheme";
-import ErrorFallback from "@/components/layout/error/ErrorFallback";
-import Sidebar from "@/components/layout/common/default/Sidebar";
-import Navigation from "@/components/layout/common/default/Navigation";
-import Footer from "@/components/layout/common/default/Footer";
+import ErrorFallback from "@/components/layouts/error/ErrorFallback";
+import Sidebar from "@/components/layouts/commons/default/Sidebar";
+import Navigation from "@/components/layouts/commons/default/Navigation";
+import Footer from "@/components/layouts/commons/default/Footer";
 
 interface IRootProps {
   children: ReactNode;

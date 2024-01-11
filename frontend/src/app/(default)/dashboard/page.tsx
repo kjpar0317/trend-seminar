@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 // import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
-import DemoCard from "@/components/card/demo/DemoCard";
+import DemoCard from "@/components/cards/demo/DemoCard";
 
 export default function Dashboard(): ReactElement {
   const animate = useAnimate();
