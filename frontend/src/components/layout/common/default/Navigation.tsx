@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 
 import ErrorIndicator from "@/components/indicator/monitoring/ErrorIndicator";
-import ThemeSelector from "@/components/selector/theme/ThemeSelector";
+import ThemeModSelector from "@/components/selector/theme/ThemeModSelector";
 
 export default function Navigation(): ReactElement {
   return (
@@ -45,7 +45,7 @@ export default function Navigation(): ReactElement {
             </div>
           </div>
           <ErrorIndicator />
-          <ThemeSelector />
+          <ThemeModSelector />
         </div>
       </div>
     </nav>
