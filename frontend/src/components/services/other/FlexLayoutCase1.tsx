@@ -117,7 +117,7 @@ const json: any = {
 
 const model = Model.fromJson(json);
 
-export default function FlexLayoutTest(): ReactElement {
+export default function FlexLayoutCase1(): ReactElement {
     const factory = (node: TabNode) => {
     const component: string | undefined = node.getComponent();
 
