@@ -40,19 +40,19 @@ export default function Monitoring(): ReactElement {
       <div className="w-full space-x-2">
         <button
           className="btn btn-primary"
-          onClick={() => handleClick(".test1")}
+          onClick={() => handleClick("#grid_test1")}
         >
           Test1
         </button>
         <button
           className="btn btn-primary"
-          onClick={() => handleClick(".test2")}
+          onClick={() => handleClick("#grid_test2")}
         >
           Test2
         </button>
         <button
           className="btn btn-primary"
-          onClick={() => handleClick(".test3")}
+          onClick={() => handleClick("#grid_test3")}
         >
           Test3
         </button>
@@ -70,7 +70,7 @@ export default function Monitoring(): ReactElement {
           cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         >
           {layouts.map((layout: ILayout) => (
-            <div key={layout.i}>
+            <div id={`grid_${layout.i}`} key={layout.i}>
               <GridCard id={layout.i} />
             </div>
           ))}
