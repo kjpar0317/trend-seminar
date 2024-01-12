@@ -75,7 +75,7 @@ export default function useAnimate(): IAnimateStore {
     function bounceAnimate(selector: string, optionClsName: string | undefined) {
         if(!theme.animate) return;
         const bounceTimeline = gsap.timeline({});
-        bounceTimeline.to(selector, { scale: 1.05, ease: "bounce", yoyo: true, repeat: 5, background: "oklch(var(--er)/var(--tw-bg-opacity))",className: optionClsName
+        bounceTimeline.to(selector, { scale: 1.1, ease: "bounce", yoyo: true, repeat: 5, background: "oklch(var(--er)/var(--tw-bg-opacity))", className: optionClsName, zIndex: 99999
             , onComplete: function () {
                 this.progress(0).kill();
             }
