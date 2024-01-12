@@ -28,3 +28,6 @@ type TEaseSinc = "sinc.out" | "sinc.inOut" | "sinc.in";
 type TEaseType = TEasePower1 | TEasePower2 | TEasePower3 | TEasePower4 | TEaseBack | TEaseBounce | TEaseCirc | TEaseElastic | TEaseExpo | TEaseSinc | "steps";
 type TDivAction = "fade" | "transform" | "shuffle" | "none";
 type TFormAction = "fade" | "transform" | "elevator"| "none";
+
+type TGSAPModalProvider = { children: string | JSX.Element | JSX.Element[] | { children: ReactNode } | (() => JSX.Element); };
+type ButtonEvent = MouseEvent<HTMLButtonElement, MouseEvent>;

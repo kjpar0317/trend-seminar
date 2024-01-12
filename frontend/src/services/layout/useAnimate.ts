@@ -1,6 +1,6 @@
 import type { IThemeStore } from "./useTheme";
 
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { gsap } from "gsap";
 import { range } from "lodash-es";
 
@@ -11,7 +11,7 @@ export interface IAnimateStore {
     animateDivArea: (timeline: gsap.core.Timeline, target: string, action: TDivAction) => gsap.core.Timeline;
     animateFormArea: (timeline: gsap.core.Timeline, target: string, action: TFormAction) => gsap.core.Timeline;
     bounceAnimate: (selector: string, optionClsName?: string | undefined) => void;
-    openFoldAnimate: (timeline: gsap.core.Timeline, ...targets: string[]) => gsap.core.Timeline;
+    openFoldAnimate: (timeline: gsap.core.Timeline, area?: string | undefined) => gsap.core.Timeline;
     reverseAnimate: (timeline: gsap.core.Timeline) => void;
 } 
 
@@ -30,6 +30,9 @@ export default function useAnimate(): IAnimateStore {
         const animateDiv = document.querySelectorAll(target);
 
         if(animateDiv.length > 0) {
+            // 초기화
+            // timeline.progress(0).kill();
+
             if(action === "fade") {
                 timeline.fromTo(".animate_div", { opacity: 0 }, { ease: "power3.inOut", duration: 0.6, scale: 1, stagger: 0.3, opacity: 1  });
             } else if(action === "transform") {
@@ -47,6 +50,7 @@ export default function useAnimate(): IAnimateStore {
                     }
                 });
             }
+            // timeline.progress(0).kill();
         }
         return timeline;
     }
@@ -78,20 +82,18 @@ export default function useAnimate(): IAnimateStore {
         });
     }
     
-    function openFoldAnimate(timeline: gsap.core.Timeline, ...targets: string[]): gsap.core.Timeline {
-        range(0, targets.length).forEach((f: number) => {
-            if(f === 0) {
-                timeline
-                    .to(targets[f], {scaleY: 0.01, x: 1, opacity: 1, display: "flex", duration: 0.4})
-                    .to(targets[f], {scaleY: 1, background: "rgba(255,255,255,0.16)", duration: 0.6});
-            } else if(f === 1) {
-                timeline.to(targets[f], {scaleY: 1, opacity: 1, duration: 0.6}, "-=0.4")
-            } else if(f === 2) {
-                timeline.to(targets[f], {scaleY: 1, opacity: 1, duration: 0.4}, "-=0.2")
-            } else if(f === 3) {
-                timeline.to(targets[f], { background: "rgba(255,255,255,0.3)", border: "1px solid rgba(255,255,255,0.3)", duration: 0.8}, "-=0.4");
-            }
-        });
+    function openFoldAnimate(timeline: gsap.core.Timeline, area?: string | undefined): gsap.core.Timeline {
+        timeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+
+        if(area) {
+            const folderForm = document.querySelectorAll(area);
+            timeline.to(folderForm, {scaleY: 0.01, x: 1, opacity: 1, display: "flex", duration: 0.4})
+                    .to(folderForm, { opacity: 0, duration: 0.2 });
+        } else {
+            const folderForm = document.querySelectorAll("#main_gsap");
+            timeline.to(folderForm, {scaleY: 0.01, x: 1, opacity: 1, display: "flex", duration: 0.4})
+                    .to(folderForm, { opacity: 0, duration: 0.2 });
+        }
 
         return timeline;
     }

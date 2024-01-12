@@ -7,7 +7,6 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import useTheme from "@/services/layout/useTheme";
 import ErrorFallback from "@/components/layouts/error/ErrorFallback";
-import GsapModalProvider from "@/components/provider/GsapModalProvider";
 import Sidebar from "@/components/layouts/commons/default/Sidebar";
 import Navigation from "@/components/layouts/commons/default/Navigation";
 import Footer from "@/components/layouts/commons/default/Footer";

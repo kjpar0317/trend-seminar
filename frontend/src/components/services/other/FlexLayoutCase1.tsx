@@ -11,26 +11,34 @@ import Monitoring from "@/components/services/default/Monitoring";
 import FormTest from "@/components/services/default/FormTest";
 
 const json: any = {
-  global: {
-    tabEnableFloat: true,
-    // tabSetMinWidth: 100,
-    // tabSetMinHeight: 100,
-    // borderMinSize: 100,
-  },
-  borders: [
-    {
-      type: "border",
-      weight: 50,
-      "location": "bottom",
-      children: [
-        {
-          type: "tab",
-          name: "Monitoring",
-          component: <Monitoring />,
-        }
-      ]
-    },
-  ],
+	global: {
+		tabEnableFloat: true,
+		// tabSetMinWidth: 100,
+		// tabSetMinHeight: 100,
+		// borderMinSize: 100,
+	},
+	borders: [
+		{
+			type: "border",
+			selected: 1,
+			location: "bottom",
+			children: [
+				{
+					type: "tab",
+					id: "#1-1",
+					name: "VMWare",
+					component: "grid",
+					// enableClose: false
+				},
+				{
+					type: "tab",
+					id: "#1-2",
+					name: "OpenStack",
+					component: "grid"
+				},
+			]
+		}
+	],
 	layout: {
 		type: "row",
 		id: "#5",

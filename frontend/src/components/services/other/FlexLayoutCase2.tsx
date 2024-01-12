@@ -11,17 +11,39 @@ import Monitoring from "@/components/services/default/Monitoring";
 import FormTest from "@/components/services/default/FormTest";
 
 const json: any = {
-  global: {
-    tabEnableFloat: true,
-    // tabSetMinWidth: 100,
-    // tabSetMinHeight: 100,
-    // borderMinSize: 100,
-  },
-  borders: [],
-layout: {
-	type: "row",
-	id: "#5",
-	children: [
+	global: {
+		tabEnableFloat: true,
+		// tabSetMinWidth: 100,
+		// tabSetMinHeight: 100,
+		// borderMinSize: 100,
+	},
+	borders: [
+		{
+			type: "border",
+			selected: 0,
+			location: "bottom",
+			children: [
+				{
+					type: "tab",
+					id: "#1-1",
+					name: "VMWare",
+					component: "grid",
+					enableClose: false
+				},
+				{
+					type: "tab",
+					id: "#1-2",
+					name: "OpenStack",
+					component: "grid",
+					enableClose: false
+				},
+			]
+		}
+	],
+	layout: {
+		type: "row",
+		id: "#5",
+		children: [
 		{
 			type: "row",
 			id: "#88",
@@ -58,10 +80,11 @@ layout: {
 							component: <FormTest />
 						},
 					]
-				},
-			]
-		}
-	]},
+					},
+				]
+			}
+		]
+	},
 };
 
 const model = Model.fromJson(json);

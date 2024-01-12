@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import GSAPProvider from "@/components/provider/GSAPProvider";
+
 import "./globals.css";
 import "@/assets/style/transition.css";
 
@@ -19,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} data-theme="light">
-        {children}
+        <GSAPProvider>
+          {children}
+        </GSAPProvider>
       </body>
     </html>
   );

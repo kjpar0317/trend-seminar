@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactElement } from "react";
 
 import Sidebar from "@/components/layouts/commons/other/Sidebar";
