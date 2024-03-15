@@ -5,15 +5,15 @@ import { random } from "lodash-es";
 
 export default function AlarmOpenStack(): ReactElement {
     function handleGo() {
-        const randDur: number = random(.15, 1.5);
-        const randStag: number = random(.1, .15);
+        const randDur: number = random(.3, 1.5);
+        const randStag: number = random(.2, .5);
 
         gsap.from(".acolumns"
             , {
                 x: -2000,
                 duration: randDur,
                 autoAlpha: 1,
-                stagger: 0.2,
+                stagger: randStag,
                 repeat: -1
             }
         );
