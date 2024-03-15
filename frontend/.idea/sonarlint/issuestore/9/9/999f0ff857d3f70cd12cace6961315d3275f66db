@@ -1,0 +1,3 @@
+
+Ïtypescript:S6819"²Use <input type="button">, <input type="image">, <input type="reset">, <input type="submit">, or <button> instead of the "button" role to ensure accessibility across all devices.(—£µë
+Wtypescript:S6845";`tabIndex` should only be declared on interactive elements.(›êÍ·

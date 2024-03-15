@@ -9,6 +9,7 @@ import Dashboard from "@/components/services/default/Dashboard";
 import Profile from "@/components/services/default/Profile";
 import Monitoring from "@/components/services/default/Monitoring";
 import FormTest from "@/components/services/default/FormTest";
+import AlarmOpenStack from "@/components/services/alarm/AlarmOpenStack";
 
 const json: any = {
 	global: {
@@ -27,7 +28,7 @@ const json: any = {
 					type: "tab",
 					id: "#1-1",
 					name: "VMWare",
-					component: "grid",
+					component: <AlarmOpenStack />,
 					enableClose: false
 				},
 				{

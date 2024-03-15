@@ -1,13 +1,38 @@
 "use client";
 
 import type { ReactElement } from "react";
+import type { ObjectSchema } from "yup";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
+// import { authenticate } from "@/api/auth"
+import { signIn } from 'next-auth/react';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+interface ILoginForm {
+  username: string;
+  password: string;
+}
+
+const schema: ObjectSchema<ILoginForm> = yup.object().shape({
+  username: yup.string().required("Username은 필수 값 입니다."),
+  password: yup.string()
+      .min(8)
+      .max(15)
+      .required("password must be 8 - 15 characters.")
+});
 
 export default function Login(): ReactElement {
-    const router = useRouter();
+    // const [errorMsg, dispatch] = useFormState(authenticate, undefined);
+    const {
+      register,
+      handleSubmit,
+      formState: { errors }, // 버전 6라면 errors라고 작성함.
+    } = useForm({
+      resolver: yupResolver(schema),
+    });
 
     useEffect(() => {
       let box: gsap.core.Timeline = gsap.timeline();
@@ -26,9 +51,9 @@ export default function Login(): ReactElement {
         { opacity: 1, y: 0, stagger: 0.3 }
       );
     }, []);
-  
-    function handleClick() {
-      router.push("/dashboard");
+
+    async function handleOnSubmit(data: ILoginForm) {
+      await signIn("credentials", data as any);
     }
   
     return (
@@ -43,54 +68,58 @@ export default function Login(): ReactElement {
         <div className="ani_container lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2 opacity-0">
           <h1 className="form_title text-2xl font-semibold mb-4">Login</h1>
           <div className="form_inputgroup">
-            <div className="input_section mb-4">
-              <label htmlFor="username" className="block text-gray-600">
-                Username
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                className=" w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                autoComplete="off"
-              />
-            </div>
-            <div className="input_section mb-4">
-              <label htmlFor="password" className="block text-gray-600">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className=" w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                autoComplete="off"
-              />
-            </div>
-            <div className="input_section mb-4 flex items-center">
-              <input
-                type="checkbox"
-                id="remember"
-                name="remember"
-                className="text-blue-500"
-              />
-              <label htmlFor="remember" className="text-gray-600 ml-2">
-                Remember Me
-              </label>
-            </div>
-            <div className="input_section mb-6 text-blue-500">
-              <a href="#" className="hover:underline">
-                Forgot Password?
-              </a>
-            </div>
-            <div className="form_button">
-              <button
-                className=" bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full btn-ease-in"
-                onClick={handleClick}
-              >
-                Login
-              </button>
-            </div>
+            <form onSubmit={handleSubmit(handleOnSubmit)}>
+              <div className="input_section mb-4">
+                <label htmlFor="username" className="block text-gray-600">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  {...register("username")}
+                  className=" w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                  autoComplete="off"
+                />
+                { errors.username && <p className="text-error">{errors.username?.message}</p> }
+              </div>
+              <div className="input_section mb-4">
+                <label htmlFor="password" className="block text-gray-600">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  {...register("password")}
+                  className=" w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                  autoComplete="off"
+                />
+                { errors.password && <p className="text-error">{errors.password?.message}</p> }
+              </div>
+              <div className="input_section mb-4 flex items-center">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  name="remember"
+                  className="text-blue-500"
+                />
+                <label htmlFor="remember" className="text-gray-600 ml-2">
+                  Remember Me
+                </label>
+              </div>
+              <div className="input_section mb-6 text-blue-500">
+                <a href="#" className="hover:underline">
+                  Forgot Password?
+                </a>
+              </div>
+              <div className="form_button">
+                <button
+                  type="submit"
+                  className=" bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full btn-ease-in"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
           </div>
           <div className="form_last mt-6 text-blue-500 text-center transition duration-500 ease-linea">
             <a href="#" className="hover:underline">

@@ -1,6 +1,6 @@
 import type { IThemeStore } from "./useTheme";
 
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import { gsap } from "gsap";
 import { range } from "lodash-es";
 
@@ -75,7 +75,7 @@ export default function useAnimate(): IAnimateStore {
     function bounceAnimate(selector: string, optionClsName: string | undefined) {
         if(!theme.animate) return;
         const bounceTimeline = gsap.timeline({});
-        bounceTimeline.to(selector, { scale: 1.1, ease: "bounce", yoyo: true, repeat: 5, background: "oklch(var(--er)/var(--tw-bg-opacity))", className: optionClsName, zIndex: 99999
+        bounceTimeline.to(selector, { scale: 1.05, ease: "bounce", yoyo: true, repeat: 5, background: "oklch(var(--er)/var(--tw-bg-opacity))",className: optionClsName
             , onComplete: function () {
                 this.progress(0).kill();
             }

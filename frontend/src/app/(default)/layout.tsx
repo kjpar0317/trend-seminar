@@ -18,9 +18,11 @@ interface IRootProps {
 export default function DefaultLayout({
   children,
 }: Readonly<IRootProps>): ReactElement {
+  // const { data: session } = useSession()
   const theme: IThemeStore = useTheme();
 
   return (
+
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <div className="min-h-screen bg-base-200 w-full" data-theme={theme.themePattern}>
         <Sidebar />
