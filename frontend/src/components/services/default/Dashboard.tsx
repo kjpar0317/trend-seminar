@@ -3,13 +3,16 @@
 import type { ReactElement } from "react";
 import { useState, useEffect } from "react";
 import { gsap } from "gsap";
-// import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
+import useMovie from "@/services/test/useMovie";
 import DemoCard from "@/components/cards/demo/DemoCard";
+import { useSession } from "next-auth/react";
 
 export default function Dashboard(): ReactElement {
   const animate = useAnimate();
+  const movie = useMovie();
+  const { data : session } = useSession(); 
   const [toggle, setToggle] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>();
   // const containerRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
@@ -36,6 +39,10 @@ export default function Dashboard(): ReactElement {
   }, []);
 
   function handleClick() {
+    console.log(session?.user);
+
+    console.log(movie.movie_list);
+
     if (!toggle) {
       const rotateTimeline: gsap.core.Timeline = gsap.timeline({});
       rotateTimeline

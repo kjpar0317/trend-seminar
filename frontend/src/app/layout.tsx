@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 
 import GSAPProvider from "@/components/provider/GSAPProvider";
 
@@ -14,16 +15,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  children
+}: any) {
   return (
     <html lang="en">
       <body className={inter.className} data-theme="light">
-        <GSAPProvider>
-          {children}
-        </GSAPProvider>
+        <SessionProvider>
+          <GSAPProvider>
+            {children}
+          </GSAPProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -1,4 +1,6 @@
-// import type { NextAuthConfig } from "next-auth"
+import type { NextAuthConfig, User, Session } from "next-auth"
+import type { NextResponse } from "next/server";
+import type { JWT } from "next-auth/jwt";
 
 import NextAuth from "next-auth"
 // import Apple from "next-auth/providers/apple"
@@ -64,6 +66,8 @@ import NextAuth from "next-auth"
 // import Zoho from "next-auth/providers/zoho"
 // import Zoom from "next-auth/providers/zoom"
 import CredentialsProvider from "next-auth/providers/credentials";
+
+export type Awaitable<T> = T | PromiseLike<T> | any;
 
 export const config = {
   theme: {
@@ -147,14 +151,20 @@ export const config = {
         },
         password: { label: "비밀번호", type: "password" },
       },
-      async authorize(credentials, req): Promise<any> {
+      async authorize(credentials, req): Promise<User | null> {
         console.log("authorize");
 
+        // FAKE FETCH (나중에 access token 반환 rest api)
         const res = await fetch(`http://www.omdbapi.com/?s=&apikey=da979bab`);
+        const fakeToken = "yJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJjbXAtc2VydmljZS1hdXRoIiwic3ViIjoic3VwZXJhZG1pbiIsImF1ZCI6ImNtcC1jbGllbnQtZnJvbnRlbmQiLCJleHAiOjE3MzkzMzc3NTUsImlhdCI6MTcwNzgwMTc1NSwiaW5mb3MiOnsiZW50TmFtZSI6IuuMgOq1rOq0keyXreyLnCIsInVuaXROYW1lIjoi7KCV67O07ZmU67aA7IScIiwiaXAiOiIxMjcuMC4wLjEiLCJjb250cmFjdCI6IjAxMC0xMjM0LTk5OTkiLCJhY3RpdmUiOiJsb2NhbCIsImFkbWluIjp0cnVlLCJpc1NTT0xvZ2luIjpmYWxzZSwibG9naW5Vc2VyTmFtZSI6Iuq0gOumrOyekCIsImlzT1NNYW5hZ2VyIjp0cnVlLCJsb2dpblRpbWUiOjE3MDc4MDE2ODMwMDAsImVudENvZGUiOiJEQUUiLCJ1bml0Q29kZSI6IjAwMiIsImVtYWlsIjoiYWJjQGlubm9ncmlkLmNvbSIsInVzZXJuYW1lIjoic3VwZXJhZG1pbiJ9fQ.pS2QIGU8roPtXHjGEeIr4z_Ir6euVqMYNz6OBJ8TsjViqzR406DEqZKvNI0a9XQzLXwKrJDJS73uT2fe-IfEWg";
 
-        const fakeData = {
-          user: { ...credentials },
-          token: "yJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJjbXAtc2VydmljZS1hdXRoIiwic3ViIjoic3VwZXJhZG1pbiIsImF1ZCI6ImNtcC1jbGllbnQtZnJvbnRlbmQiLCJleHAiOjE3MzkzMzc3NTUsImlhdCI6MTcwNzgwMTc1NSwiaW5mb3MiOnsiZW50TmFtZSI6IuuMgOq1rOq0keyXreyLnCIsInVuaXROYW1lIjoi7KCV67O07ZmU67aA7IScIiwiaXAiOiIxMjcuMC4wLjEiLCJjb250cmFjdCI6IjAxMC0xMjM0LTk5OTkiLCJhY3RpdmUiOiJsb2NhbCIsImFkbWluIjp0cnVlLCJpc1NTT0xvZ2luIjpmYWxzZSwibG9naW5Vc2VyTmFtZSI6Iuq0gOumrOyekCIsImlzT1NNYW5hZ2VyIjp0cnVlLCJsb2dpblRpbWUiOjE3MDc4MDE2ODMwMDAsImVudENvZGUiOiJEQUUiLCJ1bml0Q29kZSI6IjAwMiIsImVtYWlsIjoiYWJjQGlubm9ncmlkLmNvbSIsInVzZXJuYW1lIjoic3VwZXJhZG1pbiJ9fQ.pS2QIGU8roPtXHjGEeIr4z_Ir6euVqMYNz6OBJ8TsjViqzR406DEqZKvNI0a9XQzLXwKrJDJS73uT2fe-IfEWg"
+        // User형태대로 입력
+        const fakeData: User = {
+          user: {
+            username: credentials.username as string,
+            password: credentials.password as string,
+          },
+          token: fakeToken
         }
 
         return fakeData;
@@ -171,10 +181,10 @@ export const config = {
     signIn: '/login',
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } } : any) {
-      console.log('authorized');
+    authorized({ auth, request: { nextUrl } } : Awaitable<boolean | NextResponse | Response | undefined>) {
       // 유저 인증 확인
       const isLoggedIn = !!auth?.user;
+
       // 보호하고 싶은 경로 설정
       // 여기서는 /login 경로를 제외한 모든 경로가 보호 되었다
       const isOnProtected = !(nextUrl.pathname.startsWith('/login'));
@@ -187,53 +197,29 @@ export const config = {
         // 홈페이지로 이동
         return Response.redirect(new URL('/dashboard', nextUrl));
       }
-      console.log("asdfdafa");
       return true;
     },
-    async session(session: any) {
-      console.log("async session");
-      console.log(session);
+    async session({ session, token }: Awaitable<Session>): Promise<Awaitable<Session>> {
+      // 여기다가 client에 정보 전달, convert (나중에 api로 호출해서 해도 됨)
+      session.user = {
+        username: "adfadsffasdfdas",
+        email: "test@testest.com",
+        group: "testset"
+      };
+      session.token = token;
 
-      // // Send properties to the client, like an access_token and user id from a provider.
-      // if(session) {
-      //   session.token = token?.accessToken as string; // 전달받은 token 객체에서 토큰 값을 다시 session 객체에 담고
-      //   session.user.id = token?.id as string;
-      // }
-      
       return session; // 반환해주면, client에서 접근 가능하다. 
     },
-    async signIn(data: any) {
-      console.log("signIn");
-      console.log(data);
-
-      try {
-        // const { meta, data: token } = await snsLogin({ account, user });
-        // return meta.code === 0 || `signin?errorcode=${meta.code}`
-        return true;
-      } catch(error){
-        return false;
-      }
-    },
-    jwt({ token, user } : any) {
-      console.log('jwt');
-      // if (trigger === "update") token.name = session.user.name
-      
-      // if (account) {
-      //   token.accessToken = account?.access_token 
-      //   token.id = profile?.id
-      // }
-      // return token
+    jwt({ token, user } : Awaitable<JWT | null>) {
+      // user에 accessToken을 입력
       if(user) {
         token.accessToken = user.token;
-        token.id = user.user.username;
+        // token.id = user.user.username;
       }
-
-
-      console.log(token);
 
       return token;
     },
   },
-} as any;
+} as NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config)
