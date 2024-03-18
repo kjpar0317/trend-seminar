@@ -69,6 +69,34 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 export type Awaitable<T> = T | PromiseLike<T> | any;
 
+async function refreshAccessToken(token: JWT) {
+  try {
+    const response = await fetch(`/refreshToken`, {
+      method: "POST",
+    });
+
+    const refreshedTokens = await response.json();
+
+    if (!response.ok) {
+      throw refreshedTokens;
+    }
+
+    return {
+      ...token,
+      accessToken: refreshedTokens.access_token,
+      accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
+      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    };
+  }
+}
+
 export const config = {
   theme: {
     logo: "https://next-auth.js.org/img/logo/logo-sm.png",
@@ -159,12 +187,15 @@ export const config = {
         const fakeToken = "yJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJjbXAtc2VydmljZS1hdXRoIiwic3ViIjoic3VwZXJhZG1pbiIsImF1ZCI6ImNtcC1jbGllbnQtZnJvbnRlbmQiLCJleHAiOjE3MzkzMzc3NTUsImlhdCI6MTcwNzgwMTc1NSwiaW5mb3MiOnsiZW50TmFtZSI6IuuMgOq1rOq0keyXreyLnCIsInVuaXROYW1lIjoi7KCV67O07ZmU67aA7IScIiwiaXAiOiIxMjcuMC4wLjEiLCJjb250cmFjdCI6IjAxMC0xMjM0LTk5OTkiLCJhY3RpdmUiOiJsb2NhbCIsImFkbWluIjp0cnVlLCJpc1NTT0xvZ2luIjpmYWxzZSwibG9naW5Vc2VyTmFtZSI6Iuq0gOumrOyekCIsImlzT1NNYW5hZ2VyIjp0cnVlLCJsb2dpblRpbWUiOjE3MDc4MDE2ODMwMDAsImVudENvZGUiOiJEQUUiLCJ1bml0Q29kZSI6IjAwMiIsImVtYWlsIjoiYWJjQGlubm9ncmlkLmNvbSIsInVzZXJuYW1lIjoic3VwZXJhZG1pbiJ9fQ.pS2QIGU8roPtXHjGEeIr4z_Ir6euVqMYNz6OBJ8TsjViqzR406DEqZKvNI0a9XQzLXwKrJDJS73uT2fe-IfEWg";
 
         // User형태대로 입력
-        const fakeData: User = {
+        const fakeData: User | Session = {
           user: {
             username: credentials.username as string,
             password: credentials.password as string,
           },
-          token: fakeToken
+          token: fakeToken,
+          refreshTokenExpires: 0,
+          accessTokenExpires: "",
+          refreshToken: "",
         }
 
         return fakeData;
@@ -210,13 +241,22 @@ export const config = {
 
       return session; // 반환해주면, client에서 접근 가능하다. 
     },
-    jwt({ token, user } : Awaitable<JWT | null>) {
+    async jwt({ token, user } : Awaitable<JWT | null>) {
       // user에 accessToken을 입력
+      // refresh token은 막아 둠
       if(user) {
-        token.accessToken = user.token;
-        // token.id = user.user.username;
+        return {
+          accessToken: token.accessToken,
+          // accessTokenExpires: Date.now() + token.user.refreshToken,
+          // refreshToken: token.user.refresh_token,
+          user,
+        };
       }
+      // if(Date.now() < token.accessTokenExpires) {
+      //   return token;
+      // }
 
+      // return refreshAccessToken(token);
       return token;
     },
   },

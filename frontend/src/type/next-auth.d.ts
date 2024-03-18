@@ -20,6 +20,9 @@ declare module "next-auth" {
         password: string;
       };
       token: string;
+      refreshTokenExpires: number,
+      accessTokenExpires: string,
+      refreshToken: string,
     }
   }
   
