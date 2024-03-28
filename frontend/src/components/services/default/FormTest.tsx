@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 
 import useAnimate from "@/services/layout/useAnimate";
 import GSAPModal from "@/components/frameworks/modal/GSAPModal";
+import StarGrid from "@/components/layouts/decorations/StarGrid";
 
 export default function FormTest(): ReactElement {
     const animate = useAnimate();
@@ -53,7 +54,8 @@ export default function FormTest(): ReactElement {
   
     return (
       <div>
-        <button className="btn btn-primary" onClick={handleRecover}>복원</button>
+        <StarGrid />
+        {/* <button className="btn btn-primary" onClick={handleRecover}>복원</button>
         <div id="form_test" className="w-full h-screen bg-gradient-to-tr from-cyan-400 to-cyan-700">
           <form className="animate_form">
             <div className="grid">
@@ -90,7 +92,7 @@ export default function FormTest(): ReactElement {
               I am a modal open and close animation made with GSAP and tailwindcss.
             </p>
           </div>
-        </GSAPModal>
+        </GSAPModal> */}
       </div>
     );
 }

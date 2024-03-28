@@ -13,6 +13,8 @@
     "@hookform/resolvers": "^3.3.4",
     "ag-grid-community": "^31.1.1",
     "ag-grid-react": "^31.1.1",
+    "clsx": "^2.1.0",
+    "cva": "^0.0.0",
     "flexlayout-react": "^0.7.15",
     "gsap": "^3.12.5",
     "lodash-es": "^4.17.21",
@@ -24,6 +26,7 @@
     "react-grid-layout": "^1.4.4",
     "react-hook-form": "^7.51.0",
     "swr": "^2.2.5",
+    "tailwind-merge": "^2.2.2",
     "yup": "^1.4.0"
   },
   "devDependencies": {
