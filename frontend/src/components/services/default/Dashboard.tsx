@@ -5,13 +5,11 @@ import { useState, useEffect } from "react";
 import { gsap } from "gsap";
 
 import useAnimate from "@/services/layout/useAnimate";
-import useMovie from "@/services/test/useMovie";
 import DemoCard from "@/components/cards/demo/DemoCard";
 import { useSession } from "next-auth/react";
 
 export default function Dashboard(): ReactElement {
   const animate = useAnimate();
-  const movie = useMovie();
   const { data : session } = useSession(); 
   const [toggle, setToggle] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>();
@@ -40,8 +38,6 @@ export default function Dashboard(): ReactElement {
 
   function handleClick() {
     console.log(session?.user);
-
-    console.log(movie.movie_list);
 
     if (!toggle) {
       const rotateTimeline: gsap.core.Timeline = gsap.timeline({});

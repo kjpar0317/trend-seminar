@@ -29,3 +29,5 @@ export async function postFetch(url: string, body: any) {
     .then(res => res.json())
     .catch(err => console.log(err));
 }
+
+export const getQuery = (limit: number, page: number): string => `limit=${limit}&offset=${page ? page * limit : 0}`;
