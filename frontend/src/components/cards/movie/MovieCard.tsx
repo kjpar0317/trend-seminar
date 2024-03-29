@@ -23,7 +23,7 @@ export default function DemoCard({
           sizes="(max-width: 768px) 250vw,
                 (max-width: 1200px) 260vw,
                 270vw"
-          style={{ height: "100%", width: "100%" }}
+          className="object-cover w-full h-full"
         />
       </figure>
       <div className="card-body">

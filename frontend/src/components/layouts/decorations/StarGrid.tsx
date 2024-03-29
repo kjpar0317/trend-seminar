@@ -110,7 +110,7 @@ export default function StarGrid() {
       fill="none"
       viewBox="0 0 935 425"
       // className="absolute -top-14 -z-10"
-      className="absolute -top-14 -z-1"
+      className="absolute -top-14 -z-10"
       id="star-grid"
       ref={container}
       opacity={0}

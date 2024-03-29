@@ -7,7 +7,8 @@ const nextConfig = {
             "localhost",
             // process.env.WORDPRESS_API_URL.match(/(http(?:s)?:\/\/)(.*)/)[2], // Valid WP Image domain.
             "daisyui.com",
-            "image.tmdb.org"
+            "image.tmdb.org",
+            "placehold.co"
         ],
     },
 }
