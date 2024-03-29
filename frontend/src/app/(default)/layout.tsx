@@ -32,7 +32,9 @@ export default function DefaultLayout({
         <div className="p-4 xl:ml-80">
           <Navigation />
           <div className="w-full h-[calc(100vh_-_130px)] overflow-y-auto">
-            <StarGrid />
+            <div className="relative flex top-14">
+              <StarGrid />
+            </div>
             {children}
           </div>
           <Footer />
