@@ -26,7 +26,7 @@ export default function StarGrid() {
       gsap.set(".star-grid-item", {
         opacity: 0,
         transformOrigin: "center",
-        color: "oklch(var(--bc)/var(--tw-bg-opacity))",
+        color: "oklch(var(--b2)/var(--tw-bg-opacity))",
       });
       gsap.set(container.current, { opacity: 1, hidden: false });
 
@@ -54,7 +54,7 @@ export default function StarGrid() {
           {
             opacity: 0.2,
             rotate: "+=180",
-            color: "oklch(var(--bc)/var(--tw-bg-opacity))",
+            color: "oklch(var(--b2)/var(--tw-bg-opacity))",
             scale: 1,
             delay: -2,
             duration: 0.6,
@@ -88,7 +88,7 @@ export default function StarGrid() {
           {
             opacity: 0.2,
             rotate: "+=180",
-            color: "oklch(var(--bc)/var(--tw-bg-opacity))",
+            color: "oklch(var(--b2)/var(--tw-bg-opacity))",
             scale: 1,
             delay: -2,
             duration: 0.6,
@@ -100,6 +100,8 @@ export default function StarGrid() {
           },
         ],
       });
+
+      gsap.set(container.current, { opacity: 0 });
     },
     { scope: container }
   );
