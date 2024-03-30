@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import Image from "next/image";
 
-import useMovie from "@/services/test/useMovie";
+import useMovie from "@/services/movie/useMovie";
 
 interface IMovieCard {
   movie: IMovie;

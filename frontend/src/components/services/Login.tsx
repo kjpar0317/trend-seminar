@@ -13,8 +13,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Image from "next/image";
 
-import usePrefersReducedMotion from "@/hook/usePrefersReducedMotion";
-
 interface ILoginForm {
   username: string;
   password: string;
@@ -39,15 +37,10 @@ export default function Login(): ReactElement {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const prefersReducedMotion = usePrefersReducedMotion();
   gsap.registerPlugin(useGSAP);
 
   useGSAP(
     () => {
-      if (prefersReducedMotion) {
-        return;
-      }
-
       let box: gsap.core.Timeline = gsap.timeline();
 
       box.to(container.current, { opacity: 1, duration: 0.5 });

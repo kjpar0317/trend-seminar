@@ -10,7 +10,6 @@ import ErrorFallback from "@/components/layouts/error/ErrorFallback";
 import Sidebar from "@/components/layouts/commons/default/Sidebar";
 import Navigation from "@/components/layouts/commons/default/Navigation";
 import Footer from "@/components/layouts/commons/default/Footer";
-import StarGrid from "@/components/layouts/decorations/StarGrid";
 
 interface IRootProps {
   children: ReactNode;
@@ -32,9 +31,6 @@ export default function DefaultLayout({
         <div className="p-4 xl:ml-80">
           <Navigation />
           <div className="w-full h-[calc(100vh_-_130px)] overflow-y-auto">
-            <div className="relative flex top-14">
-              <StarGrid />
-            </div>
             {children}
           </div>
           <Footer />

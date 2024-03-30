@@ -26,9 +26,9 @@ export default function StarGrid() {
       gsap.set(".star-grid-item", {
         opacity: 0,
         transformOrigin: "center",
-        color: "#fff",
+        color: "oklch(var(--bc)/var(--tw-bg-opacity))",
       });
-      gsap.set(container.current, { opacity: 1 });
+      gsap.set(container.current, { opacity: 1, hidden: false });
 
       const tl = gsap.timeline();
 
@@ -42,7 +42,7 @@ export default function StarGrid() {
           {
             opacity: 0.4,
             rotate: "+=180",
-            color: "#ffd057",
+            color: "oklch(var(--p)/var(--tw-bg-opacity))",
             scale: 3,
             duration: 0.6,
             stagger: {
@@ -54,7 +54,7 @@ export default function StarGrid() {
           {
             opacity: 0.2,
             rotate: "+=180",
-            color: "#fff",
+            color: "oklch(var(--bc)/var(--tw-bg-opacity))",
             scale: 1,
             delay: -2,
             duration: 0.6,
@@ -76,7 +76,7 @@ export default function StarGrid() {
           {
             opacity: 0.4,
             rotate: "+=180",
-            color: "#ffd057",
+            color: "oklch(var(--p)/var(--tw-bg-opacity))",
             scale: 3,
             duration: 0.6,
             stagger: {
@@ -88,7 +88,7 @@ export default function StarGrid() {
           {
             opacity: 0.2,
             rotate: "+=180",
-            color: "#fff",
+            color: "oklch(var(--bc)/var(--tw-bg-opacity))",
             scale: 1,
             delay: -2,
             duration: 0.6,
@@ -110,7 +110,7 @@ export default function StarGrid() {
       fill="none"
       viewBox="0 0 935 425"
       // className="absolute -top-14 -z-10"
-      className="absolute -top-14 -z-10"
+      className="absolute top-14 -z-1"
       id="star-grid"
       ref={container}
       opacity={0}
