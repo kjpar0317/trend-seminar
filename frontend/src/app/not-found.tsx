@@ -1,12 +1,15 @@
 "use client";
 
-import { useLayoutEffect, type ReactElement } from "react";
-import { gsap } from "gsap";
+import type { ReactElement } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import "@/assets/style/notfound.css";
 
 export default function Custom404(): ReactElement {
-  useLayoutEffect(() => {
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
     const timeline = gsap.timeline({ defaults: { duration: 1 } });
     timeline
       .fromTo(

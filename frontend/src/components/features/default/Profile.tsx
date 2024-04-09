@@ -2,7 +2,8 @@
 
 import type { ReactElement } from "react";
 
-import { useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
 import useMovie from "@/services/movie/useMovie";
@@ -20,9 +21,10 @@ export default function Profile({
   const animate = useAnimate();
   const movie = useMovie();
 
-  useEffect(() => {
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
     animate.initAnimate?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -31,7 +33,7 @@ export default function Profile({
       <div>email: {email}</div>
       <div className="space-y-2 ml-2 mr-2 animate-div">
         {movie.movie_list.map((movie: IMovie, index: number) => (
-          <MovieCard key={index} movie={movie} />
+          <MovieCard key={`${movie.id}`} movie={movie} />
         ))}
       </div>
     </>

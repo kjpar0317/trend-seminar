@@ -8,9 +8,9 @@ import usePrefersReducedMotion from "@/hook/usePrefersReducedMotion";
 export default function StarGrid() {
   const container = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  gsap.registerPlugin(useGSAP);
-
   const grid = [14, 30] as const;
+
+  gsap.registerPlugin(useGSAP);
 
   useGSAP(
     () => {
@@ -28,7 +28,7 @@ export default function StarGrid() {
         transformOrigin: "center",
         color: "oklch(var(--b2)/var(--tw-bg-opacity))",
       });
-      gsap.set(container.current, { opacity: 1, hidden: false });
+      gsap.set(container.current, { opacity: 1 });
 
       const tl = gsap.timeline();
 

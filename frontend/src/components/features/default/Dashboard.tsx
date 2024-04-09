@@ -1,8 +1,9 @@
 "use client";
 
 import type { ReactElement } from "react";
-import { useState, useEffect } from "react";
-import { gsap } from "gsap";
+import { useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
 import DemoCard from "@/components/cards/demo/DemoCard";
@@ -10,13 +11,9 @@ import { useSession } from "next-auth/react";
 
 export default function Dashboard(): ReactElement {
   const animate = useAnimate();
-  const { data : session } = useSession(); 
+  const { data: session } = useSession();
   const [toggle, setToggle] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>();
-  // const containerRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  // const { contextSafe } = useGSAP((): void => {
-  //   containerRef;
-  // });
 
   // const handleClick = contextSafe((): void => {
   //   if (!toggle) {
@@ -31,9 +28,10 @@ export default function Dashboard(): ReactElement {
   //   setToggle(!toggle);
   // }) as MouseEventHandler<HTMLButtonElement>;
 
-  useEffect(() => {
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
     animate.initAnimate?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleClick() {

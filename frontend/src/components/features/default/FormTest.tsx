@@ -2,8 +2,9 @@
 
 import type { ReactElement, MouseEvent } from "react";
 
-import { useState, useEffect, useCallback } from "react";
-import { gsap } from "gsap";
+import { useState, useCallback } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
 import StarGrid from "@/components/layouts/decorations/StarGrid";
@@ -16,9 +17,10 @@ export default function FormTest(): ReactElement {
     gsap.timeline({})
   );
 
-  useEffect(() => {
-    animate?.initAnimate?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
+    animate.initAnimate?.();
   }, []);
 
   function handleOpenScreen1(e: MouseEvent<HTMLButtonElement>) {
@@ -37,10 +39,6 @@ export default function FormTest(): ReactElement {
     e.preventDefault();
     animate.reverseAnimate(timeline);
   }
-
-  const handleCloseScreen = useCallback(() => {
-    setOpen(!open);
-  }, [open]);
 
   const handleOpen = useCallback(() => {
     setOpen(true);

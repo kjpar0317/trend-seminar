@@ -3,7 +3,9 @@
 import type { ReactElement } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import { useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 import useAnimate from "@/services/layout/useAnimate";
 import GridCard from "@/components/cards/demo/GridCard";
 
@@ -26,9 +28,10 @@ export default function Monitoring(): ReactElement {
     { i: "test9", x: 6, y: 6, w: 3, h: 2 },
   ];
 
-  useEffect(() => {
-    animate?.initAnimate?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
+    animate.initAnimate?.();
   }, []);
 
   function handleClick(selector: string) {

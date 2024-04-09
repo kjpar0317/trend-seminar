@@ -1,15 +1,15 @@
-import { ReactElement, useState, useEffect } from "react";
-import { gsap } from "gsap";
+import { ReactElement, LegacyRef, useState, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { range, random } from "lodash-es";
 
 export default function AlarmOpenStack(): ReactElement {
+  const container = useRef(null);
   const [dup, setDup] = useState<number>(1);
 
-  useEffect(() => {
-    handleAnimate();
-  }, [dup]);
+  gsap.registerPlugin(useGSAP);
 
-  function handleAnimate() {
+  useGSAP(() => {
     const randDur: number = random(1.5, 2.5);
     const randStag: number = random(1, 5);
     const bounceTimeline = gsap.timeline({});
@@ -26,7 +26,7 @@ export default function AlarmOpenStack(): ReactElement {
       repeat: -1,
     });
     // bounceTimeline.to(".acolumns", { delay: 2 }, 1);
-  }
+  }, [{ scope: container }, dup]);
 
   function handleIncrement() {
     setDup(dup + 1);
@@ -46,7 +46,7 @@ export default function AlarmOpenStack(): ReactElement {
           decrease
         </button>
       </div>
-      <div id={"test"} className={"relative flex grid-cols-1 float-right"}>
+      <div ref={container} className={"relative flex grid-cols-1 float-right"}>
         {range(0, dup, 1).map((index) => (
           <>
             <div className={"absolute top-1 acolumns bg-amber-100 right-20"}>
