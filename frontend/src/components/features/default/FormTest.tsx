@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
-import StarGrid from "@/components/layouts/decorations/StarGrid";
+// import StarGrid from "@/components/layouts/decorations/StarGrid";
 import GSAPModal from "@/components/frameworks/modal/GSAPModal";
 
 export default function FormTest(): ReactElement {
@@ -50,7 +50,7 @@ export default function FormTest(): ReactElement {
 
   return (
     <div>
-      <StarGrid />
+      {/* <StarGrid /> */}
       <button className="btn btn-primary" onClick={handleRecover}>
         복원
       </button>
