@@ -7,8 +7,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
-// import StarGrid from "@/components/layouts/decorations/StarGrid";
 import GSAPModal from "@/components/frameworks/modal/GSAPModal";
+import StarGrid from "@/components/layouts/decorations/StarGrid";
 
 export default function FormTest(): ReactElement {
   const animate = useAnimate();
@@ -89,6 +89,7 @@ export default function FormTest(): ReactElement {
         </button>
       </div>
       <GSAPModal open={open} onClose={handleClose}>
+        <StarGrid className="z-[999999]" />
         <div className="w-[800px] h-[800px]">
           <h1 className="text-cyan-400 text-3xl font-bold mb-4 text-center">
             Hello!

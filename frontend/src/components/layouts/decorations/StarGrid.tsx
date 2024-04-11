@@ -3,9 +3,15 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import usePrefersReducedMotion from "@/hook/usePrefersReducedMotion";
 
-export default function StarGrid() {
+import usePrefersReducedMotion from "@/hook/usePrefersReducedMotion";
+import { mergeClass } from "@/util/class-utils";
+
+interface IStarGrid {
+  className?: string;
+}
+
+export default function StarGrid({ className = "-z-1" }: Readonly<IStarGrid>) {
   const container = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const grid = [14, 30] as const;
@@ -101,7 +107,7 @@ export default function StarGrid() {
         ],
       });
 
-      gsap.set(container.current, { opacity: 0 });
+      // gsap.set(container.current, { opacity: 0 });
     },
     { scope: container }
   );
@@ -112,7 +118,7 @@ export default function StarGrid() {
       fill="none"
       viewBox="0 0 935 425"
       // className="absolute -top-14 -z-10"
-      className="absolute top-14 z-2"
+      className={mergeClass("absolute top-14", className)}
       id="star-grid"
       ref={container}
       opacity={0}
