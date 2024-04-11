@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
 import GSAPModal from "@/components/frameworks/modal/GSAPModal";
-import StarGrid from "@/components/layouts/decorations/StarGrid";
+import StarGrid from "@/components/layouts/decoration/StarGrid";
 
 export default function FormTest(): ReactElement {
   const animate = useAnimate();

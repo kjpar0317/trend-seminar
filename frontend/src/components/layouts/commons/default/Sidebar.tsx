@@ -2,22 +2,32 @@
 
 import type { ReactElement } from "react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { includes } from "lodash-es";
 
 import { ARR_MENU } from "@/constant/menu";
+import useAnimate from "@/services/layout/useAnimate";
 
 import "@/assets/style/layout.css";
 
 export default function Sidebar(): ReactElement {
+  const router = useRouter();
   const pathname = usePathname();
+  const animate = useAnimate();
   const [currentRoute, setCurrentRoute] = useState<string>("");
 
   useEffect(() => {
     setCurrentRoute(pathname);
   }, [pathname]);
+
+  const handleLink = useCallback(
+    (url: string) => {
+      animate.animatePageOut("#transition-element", url, router);
+    },
+    [animate, router]
+  );
 
   return (
     <aside className="bg-primary -translate-x-80 glass fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
@@ -57,18 +67,20 @@ export default function Sidebar(): ReactElement {
               <Link aria-current="page" href={m.url}>
                 <button
                   className={`${
-                    (includes(m.url, currentRoute) && "default_button_active") ||
+                    (includes(m.url, currentRoute) &&
+                      "default_button_active") ||
                     "default_button_noactive"
                   }`}
                   type="button"
                 >
-                  <svg 
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     aria-hidden="true"
                     className="w-5 h-5 text-inherit"
-                    dangerouslySetInnerHTML={{__html: m.icon}} />
+                    dangerouslySetInnerHTML={{ __html: m.icon }}
+                  />
                   <p className="block antialiased text-primary-content leading-relaxed text-inherit font-medium capitalize">
                     {m.name}
                   </p>
@@ -116,15 +128,26 @@ export default function Sidebar(): ReactElement {
                 }`}
                 type="button"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"
+                  />
                 </svg>
                 <p className="block antialiased text-primary-content leading-relaxed text-inherit font-medium capitalize">
                   Case2
                 </p>
               </button>
             </Link>
-          </li>          
+          </li>
         </ul>
       </div>
     </aside>
