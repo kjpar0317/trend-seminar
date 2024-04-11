@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 
-import GSAPProvider from "@/components/provider/GSAPProvider";
+import UserProvider from "@/components/provider/UserProvider";
 
 import "./globals.css";
 import "@/assets/style/transition.css";
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: any) {
         suppressHydrationWarning
       >
         <SessionProvider>
-          <GSAPProvider>{children}</GSAPProvider>
+          <UserProvider>{children}</UserProvider>
         </SessionProvider>
       </body>
     </html>
