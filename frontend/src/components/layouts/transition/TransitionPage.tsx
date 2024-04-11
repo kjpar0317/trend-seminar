@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
 
 export default function TransitionPage() {
   const animate = useAnimate();
 
-  useEffect(() => {
+  gsap.registerPlugin(useGSAP);
+
+  useGSAP(() => {
     animate.animatePageIn("#transition-element");
   }, [animate]);
 

@@ -63,29 +63,28 @@ export default function Sidebar(): ReactElement {
       <div className="m-4">
         <ul className="mb-4 flex flex-col gap-1">
           {ARR_MENU.map((m: IMenu) => (
-            <li key={m.url}>
-              <Link aria-current="page" href={m.url}>
-                <button
-                  className={`${
-                    (includes(m.url, currentRoute) &&
-                      "default_button_active") ||
-                    "default_button_noactive"
-                  }`}
-                  type="button"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    className="w-5 h-5 text-inherit"
-                    dangerouslySetInnerHTML={{ __html: m.icon }}
-                  />
-                  <p className="block antialiased text-primary-content leading-relaxed text-inherit font-medium capitalize">
-                    {m.name}
-                  </p>
-                </button>
-              </Link>
+            <li key={m.url} onClick={() => handleLink(m.url)}>
+              {/* <Link aria-current="page" href={m.url}> */}
+              <button
+                className={`${
+                  (includes(m.url, currentRoute) && "default_button_active") ||
+                  "default_button_noactive"
+                }`}
+                type="button"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  className="w-5 h-5 text-inherit"
+                  dangerouslySetInnerHTML={{ __html: m.icon }}
+                />
+                <p className="block antialiased text-primary-content leading-relaxed text-inherit font-medium capitalize">
+                  {m.name}
+                </p>
+              </button>
+              {/* </Link> */}
             </li>
           ))}
         </ul>
