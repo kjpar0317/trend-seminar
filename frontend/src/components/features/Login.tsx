@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Image from "next/image";
 
-export const registerSchema = z.object({
+const registerSchema = z.object({
   username: z.string().min(1, { message: "Username is required." }),
   // .regex(
   //   /^[a-z0-9]{4,30}$/,
@@ -32,7 +32,7 @@ export const registerSchema = z.object({
 //   message: "비밀번호가 일치하지 않습니다.",
 // });
 
-export type RegisterSchemaType = z.infer<typeof registerSchema>;
+type RegisterSchemaType = z.infer<typeof registerSchema>;
 
 export default function Login(): ReactElement {
   // const [errorMsg, dispatch] = useFormState(authenticate, undefined);
