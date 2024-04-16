@@ -1,7 +1,6 @@
 "use client";
 
 import type { ReactElement } from "react";
-import type { ObjectSchema } from "yup";
 
 import { useRef } from "react";
 import gsap from "gsap";
@@ -9,23 +8,31 @@ import { useGSAP } from "@gsap/react";
 // import { authenticate } from "@/api/auth"
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import Image from "next/image";
 
-interface ILoginForm {
-  username: string;
-  password: string;
-}
-
-const schema: ObjectSchema<ILoginForm> = yup.object().shape({
-  username: yup.string().required("Username은 필수 값 입니다."),
-  password: yup
+export const registerSchema = z.object({
+  username: z.string().min(1, { message: "Username is required." }),
+  // .regex(
+  //   /^[a-z0-9]{4,30}$/,
+  //   "영문 소문자 또는 영문+숫자 조합 4~30자리를 입력해주세요."
+  // ),
+  password: z
     .string()
-    .min(8)
-    .max(15)
-    .required("password must be 8 - 15 characters."),
+    .min(8, { message: "password must be 8 - 15 characters." })
+    .max(15, { message: "password must be 8 - 15 characters." }),
+  // .regex(
+  //   /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/,
+  //   "영문+숫자+특수문자(! @ # $ % & * ?) 조합 8~15자리를 입력해주세요."
+  // ),
 });
+// .refine((data) => data.password === data.passwordCheck, {
+//   path: ["passwordCheck"],
+//   message: "비밀번호가 일치하지 않습니다.",
+// });
+
+export type RegisterSchemaType = z.infer<typeof registerSchema>;
 
 export default function Login(): ReactElement {
   // const [errorMsg, dispatch] = useFormState(authenticate, undefined);
@@ -34,8 +41,8 @@ export default function Login(): ReactElement {
     register,
     handleSubmit,
     formState: { errors }, // 버전 6라면 errors라고 작성함.
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<RegisterSchemaType>({
+    resolver: zodResolver(registerSchema),
   });
   gsap.registerPlugin(useGSAP);
 
@@ -60,8 +67,8 @@ export default function Login(): ReactElement {
     { scope: container }
   );
 
-  async function handleOnSubmit(data: ILoginForm) {
-    await signIn("credentials", data as any);
+  async function handleOnSubmit(data: any) {
+    await signIn("credentials", data);
   }
 
   return (
@@ -84,7 +91,7 @@ export default function Login(): ReactElement {
       >
         <h1 className="form_title text-2xl font-semibold mb-4">Login</h1>
         <div className="form_inputgroup">
-          <form onSubmit={handleSubmit(handleOnSubmit)}>
+          <form onSubmit={handleSubmit((data) => handleOnSubmit(data))}>
             <div className="input_section mb-4">
               <label htmlFor="username" className="block text-gray-600">
                 Username
@@ -96,7 +103,7 @@ export default function Login(): ReactElement {
                 className=" w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                 autoComplete="off"
               />
-              {errors.username && (
+              {errors.username?.message && (
                 <p className="text-error">{errors.username?.message}</p>
               )}
             </div>
@@ -111,7 +118,7 @@ export default function Login(): ReactElement {
                 className=" w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
                 autoComplete="off"
               />
-              {errors.password && (
+              {errors.password?.message && (
                 <p className="text-error">{errors.password?.message}</p>
               )}
             </div>
