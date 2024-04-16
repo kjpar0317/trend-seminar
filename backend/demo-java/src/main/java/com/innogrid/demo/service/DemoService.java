@@ -14,4 +14,5 @@ public interface DemoService {
     void deleteRedisCacheDemo(String pk);
     List<BatchJobInfo> selectBatchJobInfoList(BatchJobInfo vo);
     List<Map<String, Object>> selectBatchJobMapList(Map<String, Object> map);
+    void testVirtualThread() throws InterruptedException;
 }
