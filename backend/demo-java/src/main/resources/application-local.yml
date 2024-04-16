@@ -1,6 +1,9 @@
 spring:
   application:
     name: demo
+  threads:
+    virtual:
+      enabled: true
 
 server:
   port: 8080

@@ -1,11 +1,8 @@
 package com.innogrid.demo.controller;
 
-import com.innogrid.common.model.RedisTestVO;
 import com.innogrid.demo.service.DemoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
