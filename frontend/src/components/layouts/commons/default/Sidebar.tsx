@@ -15,7 +15,7 @@ import "@/assets/style/layout.css";
 export default function Sidebar(): ReactElement {
   const router = useRouter();
   const pathname = usePathname();
-  const animate = useAnimate();
+  const { animatePageOut } = useAnimate();
   const [currentRoute, setCurrentRoute] = useState<string>("");
 
   useEffect(() => {
@@ -24,9 +24,9 @@ export default function Sidebar(): ReactElement {
 
   const handleLink = useCallback(
     (url: string) => {
-      animate.animatePageOut("#transition-element", url, router);
+      animatePageOut("#transition-element", url, router);
     },
-    [animate, router]
+    [animatePageOut, router]
   );
 
   return (

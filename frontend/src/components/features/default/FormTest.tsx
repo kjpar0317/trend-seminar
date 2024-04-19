@@ -11,7 +11,7 @@ import GSAPModal from "@/components/frameworks/modal/GSAPModal";
 import StarGrid from "@/components/layouts/decoration/StarGrid";
 
 export default function FormTest(): ReactElement {
-  const animate = useAnimate();
+  const { initAnimate, openFoldAnimate, reverseAnimate } = useAnimate();
   const [open, setOpen] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>(
     gsap.timeline({})
@@ -20,24 +20,24 @@ export default function FormTest(): ReactElement {
   gsap.registerPlugin(useGSAP);
 
   useGSAP(() => {
-    animate.initAnimate?.();
+    initAnimate?.();
   }, []);
 
   function handleOpenScreen1(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    setTimeline(animate.openFoldAnimate(timeline));
+    setTimeline(openFoldAnimate(timeline));
   }
 
   function handleOpenScreen2(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    setTimeline(animate.openFoldAnimate(timeline, "#form_test"));
+    setTimeline(openFoldAnimate(timeline, "#form_test"));
   }
 
   function handleRecover(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    animate.reverseAnimate(timeline);
+    reverseAnimate(timeline);
   }
 
   const handleOpen = useCallback(() => {

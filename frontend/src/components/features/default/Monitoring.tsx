@@ -15,7 +15,7 @@ import "react-resizable/css/styles.css";
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 export default function Monitoring(): ReactElement {
-  const animate = useAnimate();
+  const { initAnimate, bounceAnimate } = useAnimate();
   const layouts: ILayout[] = [
     { i: "test1", x: 0, y: 0, w: 3, h: 2 },
     { i: "test2", x: 3, y: 0, w: 6, h: 2 },
@@ -31,11 +31,11 @@ export default function Monitoring(): ReactElement {
   gsap.registerPlugin(useGSAP);
 
   useGSAP(() => {
-    animate.initAnimate?.();
+    initAnimate?.();
   }, []);
 
   function handleClick(selector: string) {
-    animate.bounceAnimate?.(`div ${selector}`, "card ring ring-red-500 h-full");
+    bounceAnimate?.(`div ${selector}`, "card ring ring-red-500 h-full");
   }
 
   return (

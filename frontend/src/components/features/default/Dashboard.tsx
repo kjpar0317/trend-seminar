@@ -10,7 +10,7 @@ import DemoCard from "@/components/cards/demo/DemoCard";
 import { useSession } from "next-auth/react";
 
 export default function Dashboard(): ReactElement {
-  const animate = useAnimate();
+  const { initAnimate } = useAnimate();
   const { data: session } = useSession();
   const [toggle, setToggle] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>();
@@ -31,7 +31,7 @@ export default function Dashboard(): ReactElement {
   gsap.registerPlugin(useGSAP);
 
   useGSAP(() => {
-    animate.initAnimate?.();
+    initAnimate?.();
   }, []);
 
   function handleClick() {

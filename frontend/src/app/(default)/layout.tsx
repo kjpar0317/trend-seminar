@@ -21,14 +21,14 @@ export default function DefaultLayout({
   children,
 }: Readonly<IRootProps>): ReactElement {
   // const { data: session } = useSession()
-  const theme: IThemeStore = useTheme();
+  const { themePattern }: IThemeStore = useTheme();
   const pathname = usePathname();
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <div
         className="min-h-screen bg-base-200 w-full"
-        data-theme={theme.themePattern}
+        data-theme={themePattern}
       >
         <Sidebar />
         <div className="p-4 xl:ml-80">

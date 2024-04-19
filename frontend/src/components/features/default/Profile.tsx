@@ -18,13 +18,13 @@ export default function Profile({
   username,
   email,
 }: Readonly<IProfile>): ReactElement {
-  const animate = useAnimate();
+  const { initAnimate } = useAnimate();
   const movie = useMovie();
 
   gsap.registerPlugin(useGSAP);
 
   useGSAP(() => {
-    animate.initAnimate?.();
+    initAnimate?.();
   }, []);
 
   return (

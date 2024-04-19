@@ -6,13 +6,13 @@ import { useGSAP } from "@gsap/react";
 import useAnimate from "@/services/layout/useAnimate";
 
 export default function TransitionPage() {
-  const animate = useAnimate();
+  const { animatePageIn } = useAnimate();
 
   gsap.registerPlugin(useGSAP);
 
   useGSAP(() => {
-    animate.animatePageIn("#transition-element");
-  }, [animate]);
+    animatePageIn("#transition-element");
+  }, [animatePageIn]);
 
   return (
     <div
