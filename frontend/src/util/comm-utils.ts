@@ -54,3 +54,7 @@ export function getTextColorByTheme(theme: string) {
 export function sleep(ms: number = 1000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function numberWithCommas(n: number) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
