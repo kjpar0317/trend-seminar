@@ -51,22 +51,31 @@ export default function Login(): ReactElement {
   useGSAP(
     () => {
       if (prefersReducedMotion) {
-        gsap.set(container.current, { opacity: 0 });
+        gsap.set(container.current, { opacity: 1 });
         return;
       }
 
       let box: gsap.core.Timeline = gsap.timeline();
+      const inElem = container.current as any;
 
       box.to(container.current, { opacity: 1, duration: 0.5 });
-      box.fromTo(".form_title", { opacity: 0, y: -30 }, { opacity: 1, y: 0 });
+      box.fromTo(
+        inElem.querySelector(".form_title"),
+        { opacity: 0, y: -30 },
+        { opacity: 1, y: 0 }
+      );
       box.fromTo(
         ".form_inputgroup .input_section",
         { opacity: 0 },
         { opacity: 1, stagger: 0.3 }
       );
-      box.fromTo(".form_button", { opacity: 0, y: 20 }, { opacity: 1, y: 0 });
       box.fromTo(
-        ".form_last",
+        inElem.querySelector(".form_button"),
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0 }
+      );
+      box.fromTo(
+        inElem.querySelector(".form_last"),
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, stagger: 0.3 }
       );
