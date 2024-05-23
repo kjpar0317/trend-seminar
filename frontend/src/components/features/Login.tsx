@@ -12,6 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Image from "next/image";
 
+import usePrefersReducedMotion from "@/hook/usePrefersReducedMotion";
+
 const registerSchema = z.object({
   username: z.string().min(1, { message: "Username is required." }),
   // .regex(
@@ -36,7 +38,6 @@ type RegisterSchemaType = z.infer<typeof registerSchema>;
 
 export default function Login(): ReactElement {
   // const [errorMsg, dispatch] = useFormState(authenticate, undefined);
-  const container = useRef(null);
   const {
     register,
     handleSubmit,
@@ -44,9 +45,16 @@ export default function Login(): ReactElement {
   } = useForm<RegisterSchemaType>({
     resolver: zodResolver(registerSchema),
   });
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const container = useRef(null);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion) {
+        gsap.set(container.current, { opacity: 0 });
+        return;
+      }
+
       let box: gsap.core.Timeline = gsap.timeline();
 
       box.to(container.current, { opacity: 1, duration: 0.5 });
