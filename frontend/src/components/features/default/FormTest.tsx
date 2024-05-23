@@ -2,7 +2,7 @@
 
 import type { ReactElement, MouseEvent } from "react";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -16,29 +16,31 @@ export default function FormTest(): ReactElement {
   const [timeline, setTimeline] = useState<gsap.core.Timeline>(
     gsap.timeline({})
   );
+  const container = useRef(null);
 
-  gsap.registerPlugin(useGSAP);
+  const { contextSafe } = useGSAP(
+    () => {
+      initAnimate?.();
+    },
+    { scope: container }
+  );
 
-  useGSAP(() => {
-    initAnimate?.();
-  }, []);
-
-  function handleOpenScreen1(e: MouseEvent<HTMLButtonElement>) {
+  const handleOpenScreen1 = contextSafe((e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     setTimeline(openFoldAnimate(timeline));
-  }
+  });
 
-  function handleOpenScreen2(e: MouseEvent<HTMLButtonElement>) {
+  const handleOpenScreen2 = contextSafe((e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     setTimeline(openFoldAnimate(timeline, "#form_test"));
-  }
+  });
 
-  function handleRecover(e: MouseEvent<HTMLButtonElement>) {
+  const handleRecover = contextSafe((e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     reverseAnimate(timeline);
-  }
+  });
 
   const handleOpen = useCallback(() => {
     setOpen(true);
@@ -55,6 +57,7 @@ export default function FormTest(): ReactElement {
         복원
       </button>
       <div
+        ref={container}
         id="form_test"
         className="w-full h-screen bg-gradient-to-tr from-cyan-400 to-cyan-700"
       >

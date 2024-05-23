@@ -44,7 +44,6 @@ export default function Login(): ReactElement {
   } = useForm<RegisterSchemaType>({
     resolver: zodResolver(registerSchema),
   });
-  gsap.registerPlugin(useGSAP);
 
   useGSAP(
     () => {

@@ -53,15 +53,16 @@ export default function useAnimate(): IAnimateStore {
     target: string,
     action: TDivAction
   ): gsap.core.Timeline {
-    const animateDiv = document.querySelectorAll(target);
+    const animateDiv = document.querySelectorAll(".animate_div");
+    const targetDiv = document.querySelectorAll(target);
 
-    if (animateDiv.length > 0) {
+    if (targetDiv.length > 0) {
       // 초기화
       // timeline.progress(0).kill();
 
-      if (action === "fade") {
+      if (action === "fade" && animateDiv.length > 0) {
         timeline.fromTo(
-          ".animate_div",
+          animateDiv,
           { opacity: 0 },
           {
             ease: "power3.inOut",
@@ -71,9 +72,9 @@ export default function useAnimate(): IAnimateStore {
             opacity: 1,
           }
         );
-      } else if (action === "transform") {
+      } else if (action === "transform" && animateDiv.length > 0) {
         timeline.fromTo(
-          ".animate_div",
+          animateDiv,
           { scale: 0.5, opacity: 0 },
           {
             ease: "power3.inOut",
@@ -84,28 +85,28 @@ export default function useAnimate(): IAnimateStore {
           }
         );
       } else if (action === "shuffle") {
-        range(0, animateDiv.length).forEach((index: number) => {
+        range(0, targetDiv.length).forEach((index: number) => {
           if (index % 4 === 0) {
             timeline.fromTo(
-              animateDiv[index],
+              targetDiv[index],
               { x: -400, opacity: 0 },
               { x: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 }
             );
           } else if (index % 4 === 1) {
             timeline.fromTo(
-              animateDiv[index],
+              targetDiv[index],
               { y: -400, opacity: 0 },
               { y: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 }
             );
           } else if (index % 4 === 2) {
             timeline.fromTo(
-              animateDiv[index],
+              targetDiv[index],
               { x: 400, opacity: 0 },
               { x: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 }
             );
           } else if (index % 4 === 3) {
             timeline.fromTo(
-              animateDiv[index],
+              targetDiv[index],
               { y: 400, opacity: 0 },
               { y: 0, ease: "power3.inOut", duration: 0.4, opacity: 1 }
             );
@@ -127,7 +128,7 @@ export default function useAnimate(): IAnimateStore {
     if (animateForm.length > 0) {
       if (action === "fade") {
         timeline.fromTo(
-          target,
+          animateForm,
           { opacity: 0 },
           {
             ease: "power3.inOut",
@@ -139,7 +140,7 @@ export default function useAnimate(): IAnimateStore {
         );
       } else if (action === "transform") {
         timeline.fromTo(
-          target,
+          animateForm,
           { scale: 0.5, opacity: 0 },
           {
             ease: "power3.inOut",
@@ -150,18 +151,24 @@ export default function useAnimate(): IAnimateStore {
           }
         );
       } else if (action === "elevator") {
-        timeline
-          .to(target, { opacity: 1, duration: 0.2 })
-          .fromTo(
-            `${target} .input`,
-            { opacity: 0, y: 50 },
-            { opacity: 1, y: 0, stagger: 0.3 }
-          )
-          .fromTo(
-            `${target} .btn`,
+        const inputElem = document.querySelectorAll(`${target} .input`);
+        const btnElem = document.querySelectorAll(`${target} .btn`);
+        timeline.to(animateForm, { opacity: 1, duration: 0.2 });
+
+        if (inputElem.length > 0) {
+          timeline.fromTo(
+            inputElem,
             { opacity: 0, y: 50 },
             { opacity: 1, y: 0, stagger: 0.3 }
           );
+        }
+        if (btnElem.length > 0) {
+          timeline.fromTo(
+            btnElem,
+            { opacity: 0, y: 50 },
+            { opacity: 1, y: 0, stagger: 0.3 }
+          );
+        }
       }
     }
     return timeline;

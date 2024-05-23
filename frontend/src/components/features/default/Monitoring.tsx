@@ -3,7 +3,7 @@
 import type { ReactElement } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import gsap from "gsap";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 
 import useAnimate from "@/services/layout/useAnimate";
@@ -16,6 +16,7 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 export default function Monitoring(): ReactElement {
   const { initAnimate, bounceAnimate } = useAnimate();
+  const container = useRef(null);
   const layouts: ILayout[] = [
     { i: "test1", x: 0, y: 0, w: 3, h: 2 },
     { i: "test2", x: 3, y: 0, w: 6, h: 2 },
@@ -28,15 +29,16 @@ export default function Monitoring(): ReactElement {
     { i: "test9", x: 6, y: 6, w: 3, h: 2 },
   ];
 
-  gsap.registerPlugin(useGSAP);
+  const { contextSafe } = useGSAP(
+    () => {
+      initAnimate?.();
+    },
+    { scope: container }
+  );
 
-  useGSAP(() => {
-    initAnimate?.();
-  }, []);
-
-  function handleClick(selector: string) {
+  const handleClick = contextSafe((selector: string) => {
     bounceAnimate?.(`div ${selector}`, "card ring ring-red-500 h-full");
-  }
+  });
 
   return (
     <>
@@ -60,7 +62,7 @@ export default function Monitoring(): ReactElement {
           Test3
         </button>
       </div>
-      <div className="w-full">
+      <div ref={container} className="w-full">
         <ResponsiveReactGridLayout
           className="layout"
           layouts={{

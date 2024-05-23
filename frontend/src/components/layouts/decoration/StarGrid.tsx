@@ -16,8 +16,6 @@ export default function StarGrid({ className = "-z-1" }: Readonly<IStarGrid>) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const grid = [14, 30] as const;
 
-  gsap.registerPlugin(useGSAP);
-
   useGSAP(
     () => {
       if (prefersReducedMotion) {

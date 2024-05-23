@@ -7,6 +7,8 @@ import { useGSAP } from "@gsap/react";
 import usePrefersReducedMotion from "@/hook/usePrefersReducedMotion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function AnimatedContent({
   children,
 }: Readonly<{
@@ -14,7 +16,6 @@ export default function AnimatedContent({
 }>) {
   const container = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  gsap.registerPlugin(useGSAP, ScrollTrigger);
 
   useGSAP(
     () => {

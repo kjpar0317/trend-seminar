@@ -1,5 +1,6 @@
 import {
   useState,
+  useRef,
   useCallback,
   useImperativeHandle,
   forwardRef,
@@ -14,7 +15,6 @@ import { sleep } from "@/util/comm-utils";
 import { mergeClass } from "@/util/class-utils";
 
 interface IGsapModal {
-  id?: string;
   open?: boolean;
   children: ReactNode;
   className?: string;
@@ -25,12 +25,12 @@ interface IGsapModal {
 }
 
 export interface IGsapModalOut {
+  modalSaveClose: () => void;
   modalClose: () => void;
 }
 
 const GsapModal = forwardRef(function GsapModal(
   {
-    id = "modal_overlay",
     open,
     children,
     className,
@@ -44,62 +44,70 @@ const GsapModal = forwardRef(function GsapModal(
   const [modalTimeline, setModalTimeline] = useState<gsap.core.Timeline>(
     gsap.timeline({})
   );
-
-  gsap.registerPlugin(useGSAP);
+  const container = useRef(null);
 
   useImperativeHandle(
     ref,
     () => {
       return {
         modalClose() {
-          modalTimeline.reverse();
+          modalTimeline.reverse(1500);
+        },
+        async modalSaveClose() {
+          modalTimeline.reverse(1500);
+          await sleep(1500);
+          onClose?.();
         },
       };
     },
-    [modalTimeline]
+    [modalTimeline, onClose]
   );
 
-  useGSAP(() => {
-    if (open) {
-      let timeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+  const { contextSafe } = useGSAP(
+    () => {
+      if (open) {
+        let timeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+        const divElem = container.current as any;
 
-      timeline
-        .to("#" + id, {
-          scaleY: 0.01,
-          x: 1,
-          opacity: 1,
-          display: "flex",
-          duration: 0.4,
-          zIndex: 999,
-        })
-        .to("#" + id, {
-          scaleY: 1,
-          background: "rgba(255,255,255,0.16)",
-          duration: 0.6,
-        })
-        .to(
-          "#" + id + " #second",
-          { scaleY: 1, opacity: 1, duration: 0.6 },
-          "-=0.4"
-        )
-        .to(
-          "#" + id + " #third",
-          { scaleY: 1, opacity: 1, duration: 0.4 },
-          "-=0.2"
-        )
-        .to(
-          "#" + id + " #fourth",
-          {
-            background: "rgba(255,255,255,0.3)",
-            border: "1px solid rgba(255,255,255,0.3)",
-            duration: 0.8,
-          },
-          "-=0.4"
-        );
+        timeline
+          .to(divElem, {
+            scaleY: 0.01,
+            x: 1,
+            opacity: 1,
+            display: "flex",
+            duration: 0.4,
+            zIndex: 999,
+          })
+          .to(divElem, {
+            scaleY: 1,
+            background: "rgba(255,255,255,0.16)",
+            duration: 0.6,
+          })
+          .to(
+            divElem.querySelector("#second"),
+            { scaleY: 1, opacity: 1, duration: 0.6 },
+            "-=0.4"
+          )
+          .to(
+            divElem.querySelector("#third"),
+            { scaleY: 1, opacity: 1, duration: 0.4 },
+            "-=0.2"
+          )
+          .to(
+            divElem.querySelector("#fourth"),
+            {
+              background: "rgba(255,255,255,0.3)",
+              border: "1px solid rgba(255,255,255,0.3)",
+              duration: 0.8,
+            },
+            "-=0.4"
+          );
 
-      setModalTimeline(timeline);
-    }
-  }, [id, open]);
+        setModalTimeline(timeline);
+      }
+    },
+    { scope: container, dependencies: [open] }
+  );
 
   const handleSave = useCallback(() => {
     // modalTimeline.reverse();
@@ -111,15 +119,15 @@ const GsapModal = forwardRef(function GsapModal(
     onDelete?.();
   }, [onDelete]);
 
-  const handleClose = useCallback(async () => {
-    modalTimeline.reverse();
+  const handleClose = contextSafe(async () => {
+    modalTimeline.reverse(1500);
     await sleep(1500);
     onClose?.();
-  }, [modalTimeline, onClose]);
+  });
 
   return (
     <div
-      id={id}
+      ref={container}
       className="bg-primary/80 absolute z-10 left-0 top-0 h-full w-full flex items-center justify-center py-3 px-2 backdrop-blur-sm scale-y-0 -translate-x-full opacity-0 origin-center"
     >
       <div
@@ -144,7 +152,7 @@ const GsapModal = forwardRef(function GsapModal(
                 <div className="card-actions justify-end mt-3">
                   {onTest && (
                     <button className="btn btn-sm btn-info" onClick={onTest}>
-                      TEST
+                      테스트
                     </button>
                   )}
                   {onSave && (
@@ -152,7 +160,7 @@ const GsapModal = forwardRef(function GsapModal(
                       className="btn btn-sm btn-success"
                       onClick={handleSave}
                     >
-                      SAVE
+                      저장
                     </button>
                   )}
                   {onDelete && (
@@ -160,14 +168,14 @@ const GsapModal = forwardRef(function GsapModal(
                       className="btn btn-sm btn-error"
                       onClick={handleDelete}
                     >
-                      DELETE
+                      삭제
                     </button>
                   )}
                   <button
                     className="btn btn-sm btn-primary bg-primary/80 hover:bg-primary-focus"
                     onClick={handleClose}
                   >
-                    CLOSE
+                    닫기
                   </button>
                 </div>
               </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import type { ReactElement } from "react";
-import { useState } from "react";
+
+import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -14,6 +15,7 @@ export default function Dashboard(): ReactElement {
   const { data: session } = useSession();
   const [toggle, setToggle] = useState<boolean>(false);
   const [timeline, setTimeline] = useState<gsap.core.Timeline>();
+  const container = useRef(null);
 
   // const handleClick = contextSafe((): void => {
   //   if (!toggle) {
@@ -28,13 +30,14 @@ export default function Dashboard(): ReactElement {
   //   setToggle(!toggle);
   // }) as MouseEventHandler<HTMLButtonElement>;
 
-  gsap.registerPlugin(useGSAP);
+  const { contextSafe } = useGSAP(
+    () => {
+      initAnimate?.();
+    },
+    { scope: container }
+  );
 
-  useGSAP(() => {
-    initAnimate?.();
-  }, []);
-
-  function handleClick() {
+  const handleClick = contextSafe(() => {
     console.log(session?.user);
 
     if (!toggle) {
@@ -47,12 +50,12 @@ export default function Dashboard(): ReactElement {
       timeline?.reverse();
     }
     setToggle(!toggle);
-  }
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <div className="container gap-5 space-y-10">
+        <div ref={container} className="container gap-5 space-y-10">
           <DemoCard onClick={handleClick} />
           <DemoCard onClick={handleClick} />
           <DemoCard onClick={handleClick} />

@@ -1,9 +1,9 @@
 import React from "react";
 import gsap, { CSSPlugin } from "gsap";
 
-export default function useGsapToggle(options: gsap.TweenVars) {
-  gsap.registerPlugin(CSSPlugin);
+gsap.registerPlugin(CSSPlugin);
 
+export default function useGsapToggle(options: gsap.TweenVars) {
   const [open, set] = React.useState(false);
   const [ref, setRef] = React.useState({});
   const { current: tl } = React.useRef(gsap.timeline({ paused: true }));
